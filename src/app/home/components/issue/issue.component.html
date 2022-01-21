@@ -1,0 +1,6 @@
+<div [ngClass]="{
+    'issue': !issueSelected,
+    'issue-selected': issueSelected
+}" (click)="selected.emit(issue)">
+    {{issue ? issue.name : ''}}
+</div>

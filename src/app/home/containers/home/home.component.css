@@ -1,0 +1,6 @@
+.issue-list {
+    size: 100%;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+}

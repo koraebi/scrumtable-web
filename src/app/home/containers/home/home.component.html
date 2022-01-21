@@ -1,0 +1,12 @@
+<p>home works!</p>
+<div class="content" role="main">
+
+    <button (click)="sendMessage()" tabindex="0">
+        <span>Touch</span>
+    </button>
+
+</div>
+
+<div class="issue-list">
+    <app-issue *ngFor="let issue of issues" [issue]="issue" (selected)="onIssueSelected($event)"></app-issue>
+</div>
