@@ -1,0 +1,6 @@
+<div class="content">
+    <span>{{name}}</span>
+    <div cdkDropList [id]="name" [cdkDropListData]="issues" class="list" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
+        <app-issue *ngFor="let issue of issues" [issue]="issue"></app-issue>
+    </div>
+</div>

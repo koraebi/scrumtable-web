@@ -6,11 +6,15 @@ import { IssueComponent } from './components/issue/issue.component';
 import { SharedModule } from "../shared/shared.module";
 import { HomeState } from "./state/home.state";
 
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { IssueListComponent } from './containers/issue-list/issue-list.component';
+
 @NgModule({
-    imports: [HomeRoutingModule, SharedModule],
+    imports: [HomeRoutingModule, SharedModule, DragDropModule],
     declarations: [
         HomeComponent,
-        IssueComponent
+        IssueComponent,
+        IssueListComponent
     ],
     providers: [HomeFacade, HomeState]
 })

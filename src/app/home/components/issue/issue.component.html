@@ -1,6 +1,6 @@
 <div [ngClass]="{
     'issue': !issueSelected,
     'issue-selected': issueSelected
-}" (click)="selected.emit(issue)">
+}" (click)="selected.emit(issue)" cdkDrag>
     {{issue ? issue.name : ''}}
 </div>
