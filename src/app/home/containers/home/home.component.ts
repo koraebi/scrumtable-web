@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Issue } from 'src/app/core/model/issue.model';
+import { Issue } from 'src/app/home/model/issue.model';
 import { HomeFacade } from '../../home.facade';
+import {ILabel} from "../../model/label.model";
+import {labels} from "../../data/labels";
 
 @Component({
   selector: 'app-home',
@@ -8,27 +10,22 @@ import { HomeFacade } from '../../home.facade';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  issues: { [key: string]: Issue[]} = {
-    "Available": [],
-    "Must": [],
-    "Should": [],
-    "Could": [],
-    "Won't": [],
-  };
+  labels : ILabel = labels;
+
 
   get listName(): string[] {
-    return Object.keys(this.issues);
+    return Object.keys(this.labels);
   }
 
   constructor(private homeFacade: HomeFacade) {
-    this.homeFacade.getAvailableIssues$().subscribe(issues => this.issues["Available"] = issues);
-    this.homeFacade.getMustIssues$().subscribe(issues => this.issues["Must"] = issues);
-    this.homeFacade.getShouldIssues$().subscribe(issues => this.issues["Should"] = issues);
-    this.homeFacade.getCouldIssues$().subscribe(issues => this.issues["Could"] = issues);
-    this.homeFacade.getWontIssues$().subscribe(issues => this.issues["Won't"] = issues);
   }
 
   ngOnInit() {
+    this.homeFacade.getAvailableIssues$().subscribe(issues => this.labels["Available"].issues = issues);
+    this.homeFacade.getMustIssues$().subscribe(issues => this.labels["Must"].issues = issues);
+    this.homeFacade.getShouldIssues$().subscribe(issues => this.labels["Should"].issues = issues);
+    this.homeFacade.getCouldIssues$().subscribe(issues => this.labels["Could"].issues = issues);
+    this.homeFacade.getWontIssues$().subscribe(issues => this.labels["Won't"].issues = issues);
     this.homeFacade.loadIssues();
   }
 
@@ -41,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   onDrop(event: {from: string, to: string, index: number}): void {
-    if(event.from != event.to) 
-      this.homeFacade.transferIssue(event.from, event.to, this.issues[event.from][event.index]);
+    if(event.from != event.to)
+      this.homeFacade.transferIssue(event.from, event.to, this.labels[event.from].issues[event.index]);
   }
 }

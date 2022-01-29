@@ -1,13 +1,55 @@
 .list {
     width: 100%;
     max-width: 100%;
-    border: solid 1px #ccc;
-    min-height: 60px;
     display: flex;
     flex-direction: row;
     background: white;
     border-radius: 4px;
     overflow: hidden;
+}
+
+.name-div {
+  color: aquamarine;
+  width: 10%;
+}
+
+.name-span {
+  margin-left: 10px;
+}
+
+.cont {
+  height: 90px;
+}
+.cont_available {
+  height: 50px;
+}
+
+.line {
+  color: darkcyan;
+  margin-left: 10%;
+  margin-top: 0;
+  height: 2px;
+  margin-bottom: 0;
+}
+
+.my-pagination /deep/ .ngx-pagination .current,
+.btn-info {
+  background: darkcyan !important;
+  border: transparent !important;
+  border-radius: 20px !important;
+}
+
+.my-pagination /deep/ .ngx-pagination .current:hover {
+  background: #85929E !important;
+  border-radius: 20px !important;
+  border: transparent !important;
+}
+
+.full-line {
+  color: darkcyan;
+  height: 3px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .list.cdk-drop-list-dragging {
@@ -17,4 +59,5 @@
 .content {
     display: flex;
     gap: 10px;
+  width: 100%;
 }

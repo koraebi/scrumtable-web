@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Issue } from "../model/issue.model";
+import { Issue } from "../../home/model/issue.model";
 
 @Injectable()
 export class IssueAPI {

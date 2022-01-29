@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { IssueAPI } from "../core/api/issues.api";
-import { Moscow } from "../core/enum/moscow.enum";
-import { Issue } from "../core/model/issue.model";
+import { Moscow } from "./enum/moscow.enum";
+import { Issue } from "./model/issue.model";
 import { SocketService } from "../core/services/socket.service";
 import { HomeState } from "./state/home.state";
 

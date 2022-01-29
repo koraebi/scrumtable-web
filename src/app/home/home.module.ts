@@ -8,9 +8,10 @@ import { HomeState } from "./state/home.state";
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { IssueListComponent } from './containers/issue-list/issue-list.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
-    imports: [HomeRoutingModule, SharedModule, DragDropModule],
+  imports: [HomeRoutingModule, SharedModule, DragDropModule, NgxPaginationModule],
     declarations: [
         HomeComponent,
         IssueComponent,

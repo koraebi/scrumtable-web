@@ -1,6 +1,12 @@
-<div [ngClass]="{
+<div *ngIf="issue && issue.moscow" class="alert" [ngClass]="{
+    'issue_m': !issueSelected,
+    'issue-selected': issueSelected
+}" (click)="selected.emit(issue)" [style.border-color]="color" [style.color]="color" cdkDrag>
+  {{issue ? issue.name : ''}}
+</div>
+<div *ngIf="issue && !issue.moscow" class="alert" [ngClass]="{
     'issue': !issueSelected,
     'issue-selected': issueSelected
-}" (click)="selected.emit(issue)" cdkDrag>
-    {{issue ? issue.name : ''}}
+}" (click)="selected.emit(issue)" [style.background-color]="color" cdkDrag>
+  {{issue ? issue.name : ''}}
 </div>

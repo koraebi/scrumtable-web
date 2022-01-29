@@ -9,7 +9,6 @@ export class Issue {
         this.name = name;
         if (selected)
             this.selected = selected;
-
         this.moscow = moscow;
     }
 }
