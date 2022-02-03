@@ -11,6 +11,7 @@ import {labels} from "../../data/labels";
 })
 export class HomeComponent implements OnInit {
   labels : ILabel = labels;
+  detailsList: Issue[] = [];
 
 
   get listName(): string[] {
@@ -38,7 +39,24 @@ export class HomeComponent implements OnInit {
   }
 
   onDrop(event: {from: string, to: string, index: number}): void {
-    if(event.from != event.to)
+    console.log(event.from);
+    if(event.from === 'Details' && event.from != event.to){
+      this.homeFacade.transferIssue(event.from, event.to, this.detailsList[event.index]);
+      this.detailsList = this.arrayRemove(this.detailsList, this.detailsList[event.index]);
+    }
+    else if (event.from != event.to)
       this.homeFacade.transferIssue(event.from, event.to, this.labels[event.from].issues[event.index]);
+  }
+
+  onDetailsDrop(event: {from: string; to: string; index: number}) {
+    if(this.detailsList.indexOf(this.labels[event.from].issues[event.index]) === -1) {
+      this.detailsList = [...this.detailsList, this.labels[event.from].issues[event.index]]
+    }
+  }
+
+  arrayRemove(arr: Issue[], value: Issue) {
+    return arr.filter(function(ele){
+      return ele != value;
+    });
   }
 }

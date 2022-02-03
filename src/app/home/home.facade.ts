@@ -49,7 +49,10 @@ export class HomeFacade {
     transferIssue(from: string, to: string, issue: Issue) {
         // updateAPI
         // then update state
+      console.log(issue);
+      console.log(issue.moscow);
         issue.moscow = to === 'Available' ? undefined : to as Moscow;
         this.homeState.updateIssue(issue);
     }
+
 }

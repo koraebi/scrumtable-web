@@ -14,14 +14,6 @@
   margin-top: 0;
   margin-bottom: 0;
 }
-
-.details {
-  margin-top: 5px;
-  border: solid 3px #BDC3C7 ;
-  min-height: 194px;
-  border-radius: 10px;
-}
-
 .full-line {
   color: darkcyan;
   height: 3px;

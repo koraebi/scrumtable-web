@@ -6,7 +6,6 @@
     <app-issue-list *ngFor="let name of listName" [name]="name" [content]="this.labels[name]" (drop)="onDrop($event)"></app-issue-list>
   </div>
   <div class="row">
-    <div class="details">
-    </div>
+    <app-details [detailsList]="detailsList" (drop)="onDetailsDrop($event)"></app-details>
   </div>
 </div>
