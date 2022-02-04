@@ -12,6 +12,7 @@ import {labels} from "../../data/labels";
 export class HomeComponent implements OnInit {
   labels : ILabel = labels;
   detailsList: Issue[] = [];
+  message: string = '';
 
 
   get listName(): string[] {
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.homeFacade.getMessage$().subscribe(message => this.message = message);
     this.homeFacade.getAvailableIssues$().subscribe(issues => this.labels["Available"].issues = issues);
     this.homeFacade.getMustIssues$().subscribe(issues => this.labels["Must"].issues = issues);
     this.homeFacade.getShouldIssues$().subscribe(issues => this.labels["Should"].issues = issues);
@@ -31,15 +33,14 @@ export class HomeComponent implements OnInit {
   }
 
   sendMessage() {
-    this.homeFacade.sendMessage('Touched');
+    this.homeFacade.sendMessage('Message depuis le web');
   }
 
   onIssueSelected(issue: Issue): void {
-    // TODO
+    this.homeFacade.lockIssue(issue);
   }
 
   onDrop(event: {from: string, to: string, index: number}): void {
-    console.log(event.from);
     if(event.from === 'Details' && event.from != event.to){
       this.homeFacade.transferIssue(event.from, event.to, this.detailsList[event.index]);
       this.detailsList = this.arrayRemove(this.detailsList, this.detailsList[event.index]);
@@ -58,5 +59,9 @@ export class HomeComponent implements OnInit {
     return arr.filter(function(ele){
       return ele != value;
     });
+  }
+
+  selectedIssue(event: Issue) {
+    console.log(event);
   }
 }

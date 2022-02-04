@@ -19,6 +19,9 @@ export class IssueListComponent implements OnInit {
   @Output()
   drop = new EventEmitter<{from: string, to: string, index: number}>();
 
+  @Output()
+  issueSelected = new EventEmitter<Issue>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,4 +34,5 @@ export class IssueListComponent implements OnInit {
       index: event.previousIndex
     });
   }
+
 }

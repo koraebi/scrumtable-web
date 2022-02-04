@@ -3,10 +3,11 @@ import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { Moscow } from "src/app/home/enum/moscow.enum";
 import { Issue } from "../../home/model/issue.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class IssueAPI {
-    readonly API = 'http://localhost:3000/issues';
+    readonly API = environment.API_ENDPOINT;
 
     constructor(private http: HttpClient) { }
 

@@ -12,13 +12,15 @@ export class HomeFacade {
 
     // Socket
 
-    getMessage$(): Observable<string> {
+     getMessage$(): Observable<string> {
         return this.socketService.getMessage();
     }
 
     sendMessage(message: string): void {
-        this.socketService.sendMessage(message);
+         this.socketService.sendMessage(message);
     }
+
+
 
     // Issues
 
@@ -61,6 +63,14 @@ export class HomeFacade {
                 // then update state
                 (resultIssue) => this.homeState.updateIssue(resultIssue)
             )
+    }
+
+    
+
+    lockIssue(issue: Issue) {
+        issue.selected = !issue.selected;
+        this.homeState.updateIssue(issue);
+        this.socketService.sendMessage('Locked'+issue.name);
     }
 
 }

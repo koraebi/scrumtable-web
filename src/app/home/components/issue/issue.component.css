@@ -53,8 +53,5 @@
   }
 
 .issue-selected {
-    height: 200px;
-    width: 200px;
-    background-color: burlywood;
-    cursor: pointer;
+    
 }
