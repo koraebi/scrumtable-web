@@ -6,6 +6,9 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxPaginationModule} from "ngx-pagination";
+import {SocketIoModule} from "ngx-socket-io";
+import {SocketService} from "./core/services/socket.service";
 
 @NgModule({
   declarations: [
@@ -16,9 +19,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoreModule,
     HomeModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

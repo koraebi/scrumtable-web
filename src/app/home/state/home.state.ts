@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { Issue } from "src/app/core/model/issue.model";
+import { Issue } from "../model/issue.model";
 
 @Injectable()
 export class HomeState {

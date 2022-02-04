@@ -1,6 +1,6 @@
-<div [ngClass]="{
-    'issue': !issueSelected,
-    'issue-selected': issueSelected
-}" (click)="selected.emit(issue)" cdkDrag>
-    {{issue ? issue.name : ''}}
+<div *ngIf="issue && issue.moscow" class="alert issue_m"  [style.border-color]="color" [style.color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)">
+  {{issue ? issue.name : ''}}
+</div>
+<div *ngIf="issue && !issue.moscow" class="alert issue" [style.background-color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)">
+  {{issue ? issue.name : ''}}
 </div>

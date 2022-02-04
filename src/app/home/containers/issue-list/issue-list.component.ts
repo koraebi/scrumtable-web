@@ -1,6 +1,7 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Issue } from 'src/app/core/model/issue.model';
+import { Issue } from 'src/app/home/model/issue.model';
+import {IContent} from "../../model/label.model";
 
 @Component({
   selector: 'app-issue-list',
@@ -10,12 +11,16 @@ import { Issue } from 'src/app/core/model/issue.model';
 export class IssueListComponent implements OnInit {
   @Input()
   name: string = "";
+  p: number = 1;
 
   @Input()
-  issues: Issue[] = [];
+  content?: IContent;
 
   @Output()
   drop = new EventEmitter<{from: string, to: string, index: number}>();
+
+  @Output()
+  issueSelected = new EventEmitter<Issue>();
 
   constructor() { }
 
@@ -29,4 +34,5 @@ export class IssueListComponent implements OnInit {
       index: event.previousIndex
     });
   }
+
 }
