@@ -4,6 +4,7 @@ export class Issue {
     readonly number: number;
     readonly name: string;
     selected: boolean = false;
+    details: boolean = false;
     moscow?: Moscow;
 
     constructor(number: number, name: string, selected?: boolean, moscow?: Moscow) {
