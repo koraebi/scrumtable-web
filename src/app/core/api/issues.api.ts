@@ -16,13 +16,13 @@ export class IssueAPI {
     }
 
     addLabelToIssue(issue: Issue, label: Moscow): Observable<Issue> {
-        return this.http.post<string[]>(this.API + '/' + issue.number, {label: label}).pipe(map((result) => new Issue(issue.number, issue.name, issue.selected,
+        return this.http.post<string[]>(this.API + '/' + issue.number, {label: label}).pipe(map((result) => new Issue(issue.number, issue.name, issue.description, issue.selected,
             result.length === 0 ? undefined : result[0] as Moscow
             )));
     }
 
     removeLabelToIssue(issue: Issue, label: Moscow): Observable<Issue> {
-        return this.http.delete<string[]>(this.API + '/' + issue.number + '/' + label).pipe(map((result) => new Issue(issue.number, issue.name, issue.selected,
+        return this.http.delete<string[]>(this.API + '/' + issue.number + '/' + label).pipe(map((result) => new Issue(issue.number, issue.name,issue.description, issue.selected,
             result.length === 0 ? undefined : result[0] as Moscow
             )));
     }

@@ -1,16 +1,22 @@
 <div *ngIf="issue" class="card border-success mb-3" style="max-width: 18rem; cursor: move" cdkDrag (cdkDragStarted)="selected.emit(issue)">
   <div class="d-flex justify-content-between card-header bg-transparent border-success header_p">
-    <span style="margin: 7px">Issue : #35</span>
+    <span style="margin: 7px">Issue : #{{issue.number}}</span>
     <mat-icon class="mat_icon2">account_circle</mat-icon>
   </div>
   <div class="card-body text-success">
     <h2 class="card-title" >{{issue.name}}</h2>
-    <p class="card-text" style="color: black">Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+    <p class="card-text" style="color: black"> {{issue.description}}</p>
+    <span><i>-- 1 Comment </i></span>
   </div>
   <div class="div_container">
     <span class="badge rounded-pill bg-primary issue_label">Primary</span>
     <span class="badge rounded-pill bg-secondary issue_label">Secondary</span>
     <span class="badge rounded-pill bg-success issue_label">Success</span>
     <span class="badge rounded-pill bg-danger issue_label">Danger</span>
+  </div>
+  <div class="div_container">
+    <mat-icon class="mat_icon">account_circle</mat-icon>
+    <mat-icon class="mat_icon">account_circle</mat-icon>
+    <mat-icon class="mat_icon">account_circle</mat-icon>
   </div>
 </div>

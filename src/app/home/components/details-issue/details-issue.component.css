@@ -35,3 +35,9 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.mat_icon {
+  margin-left: 5px;
+  color: #85929E;
+  font-size: 30px;
+}
+
