@@ -22,6 +22,7 @@ export class DetailsIssueComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.issue?.assignee);
   }
 
 }

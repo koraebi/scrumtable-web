@@ -46,6 +46,16 @@
   display: inline-block;
 }
 
+.assignee_avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+
+.mat_icon2 {
+  font-size: 36px;
+}
+
 .issue_param {
   margin-top: 40px;
   margin-left: 15px;

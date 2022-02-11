@@ -7,7 +7,8 @@
   </div>
   <div class="issue_f">
     <div class="issue_img">
-      <mat-icon [style.color]="color" style="font-size: 36px">account_circle</mat-icon>
+      <mat-icon *ngIf="!issue.assignee" [style.color]="color" class="mat_icon2">account_circle</mat-icon>
+      <img class="assignee_avatar" *ngIf="issue.assignee" src="{{issue.assignee.avatar_url}}">
     </div>
     <div class="issue_param">
       <mat-icon [style.color]="color" style="font-size: 16px">settings</mat-icon>
