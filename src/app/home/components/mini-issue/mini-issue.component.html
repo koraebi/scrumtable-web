@@ -1,0 +1,18 @@
+<div *ngIf="issue" class="issue" [style.border-color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)">
+  <div class="issue_bar" [style.background]="color"></div>
+  <div class="issue_desc">
+   <span class="issue_text">
+    {{issue.name}}
+   </span>
+  </div>
+  <div class="issue_f">
+    <div class="issue_img">
+      <mat-icon [style.color]="color" style="font-size: 36px">account_circle</mat-icon>
+    </div>
+    <div class="issue_param">
+      <mat-icon [style.color]="color" style="font-size: 16px">settings</mat-icon>
+    </div>
+  </div>
+
+</div>
+
