@@ -108,9 +108,11 @@ export class HomeFacade {
 
   addMoscowLabel(issue: Issue, moscow: Moscow): void {
     // add the new moscow label
+    issue.moscow =  moscow;
+    this.homeState.updateIssue(issue)
     this.issuesAPI.addLabelToIssue(issue, moscow).subscribe(
       // then update state
-      (resultIssue) => this.homeState.updateIssue(resultIssue)
+      (resultIssue) => {}
     );
   }
 
@@ -118,8 +120,10 @@ export class HomeFacade {
     // remove the current moscow label
     this.issuesAPI.removeLabelToIssue(issue, issue.moscow as Moscow).subscribe(
       // then update state
-      (resultIssue) => this.homeState.updateIssue(resultIssue)
+      (resultIssue) => {}
     );
+    issue.moscow = undefined;
+    this.homeState.updateIssue(issue);
   }
 
   changeMoscowLabel(issue: Issue, moscow: Moscow): void {
@@ -128,8 +132,10 @@ export class HomeFacade {
       .subscribe((resultIssue) =>
         this.issuesAPI
           .addLabelToIssue(resultIssue, moscow)
-          .subscribe((finalIssue) => this.homeState.updateIssue(finalIssue))
+          .subscribe((finalIssue) => {})
       );
+    issue.moscow = moscow;
+    this.homeState.updateIssue(issue);
   }
 
   lockIssue(issue: Issue) {
