@@ -11,14 +11,19 @@ import { IssueListComponent } from './containers/issue-list/issue-list.component
 import {NgxPaginationModule} from "ngx-pagination";
 import { DetailsComponent } from './containers/details/details.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MaterialModule} from "../shared/modules/material/material.module";
+import { MiniIssueComponent } from './components/mini-issue/mini-issue.component';
+import { DetailsIssueComponent } from './components/details-issue/details-issue.component';
 
 @NgModule({
-    imports: [HomeRoutingModule, SharedModule, DragDropModule, NgxPaginationModule, MatGridListModule],
+  imports: [HomeRoutingModule, SharedModule, DragDropModule, NgxPaginationModule, MatGridListModule, MaterialModule],
     declarations: [
         HomeComponent,
         IssueComponent,
         IssueListComponent,
-        DetailsComponent
+        DetailsComponent,
+        MiniIssueComponent,
+        DetailsIssueComponent
     ],
     providers: [HomeFacade, HomeState]
 })

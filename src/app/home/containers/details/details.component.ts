@@ -20,8 +20,6 @@ export class DetailsComponent implements OnInit {
 
   @Output()
   drop = new EventEmitter<{from: string, to: string, index: number}>();
-
-  tiles: Tile[] = [];
   constructor() { }
 
 
@@ -29,21 +27,6 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnChanges(): void{
-    this.createTiles();
-  }
-
-  createTiles() {
-    this.tiles = [];
-    this.detailsList.forEach(issue => {
-      let tile: Tile = {
-        issue : issue,
-        text: 'Description de l\'issue '+ issue.name,
-        cols: 1,
-        rows: 1,
-        color: '#616A6B'
-      }
-      this.tiles.push(tile);
-    });
   }
 
 

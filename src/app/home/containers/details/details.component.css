@@ -3,9 +3,12 @@
   border: solid 3px #BDC3C7 ;
   min-height: 194px;
   border-radius: 10px;
+  overflow-x: auto;
 }
-
 .basic-container {
   padding: 3px;
+}
+app-details-issue {
+  margin: 7px;
 }
 
