@@ -16,10 +16,6 @@ export class HomeFacade {
 
   // Socket
 
-  getMessage$(): Observable<string> {
-    return this.socketService.getMessage();
-  }
-
   sendMessage(event:string, message: string): void {
     this.socketService.sendMessage(event, message);
   }

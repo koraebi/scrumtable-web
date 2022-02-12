@@ -23,9 +23,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.homeFacade
-      .getMessage$()
-      .subscribe((message) => (this.message = message));
-    this.homeFacade
       .getAvailableIssues$()
       .subscribe((issues) => (this.labels['Available'].issues = issues));
     this.homeFacade
