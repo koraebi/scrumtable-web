@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   sendMessage() {
-    this.homeFacade.sendMessage('Message depuis le web');
+    //this.homeFacade.sendMessage('Message depuis le web');
   }
 
   onIssueSelected(issue: Issue): void {
@@ -73,6 +73,8 @@ export class HomeComponent implements OnInit {
           event.to as Moscow
         );
     }
+
+    this.homeFacade.sendMessage('updateMobileIssues', '');
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {

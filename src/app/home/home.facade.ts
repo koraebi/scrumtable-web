@@ -20,8 +20,8 @@ export class HomeFacade {
     return this.socketService.getMessage();
   }
 
-  sendMessage(message: string): void {
-    this.socketService.sendMessage(message);
+  sendMessage(event:string, message: string): void {
+    this.socketService.sendMessage(event, message);
   }
 
   // Issues
@@ -141,6 +141,5 @@ export class HomeFacade {
   lockIssue(issue: Issue) {
     issue.selected = !issue.selected;
     this.homeState.updateIssue(issue);
-    this.socketService.sendMessage('Locked' + issue.name);
   }
 }
