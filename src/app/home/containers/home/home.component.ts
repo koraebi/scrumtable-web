@@ -23,9 +23,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.homeFacade
-      .getMessage$()
-      .subscribe((message) => (this.message = message));
-    this.homeFacade
       .getAvailableIssues$()
       .subscribe((issues) => (this.labels['Available'].issues = issues));
     this.homeFacade
@@ -47,18 +44,24 @@ export class HomeComponent implements OnInit {
   }
 
   sendMessage() {
-    this.homeFacade.sendMessage('Message depuis le web');
+    //this.homeFacade.sendMessage('Message depuis le web');
   }
 
   onIssueSelected(issue: Issue): void {
-    this.homeFacade.lockIssue(issue);
+    this.homeFacade.sendMessage('lockMobileIssue', issue.number.toString());
   }
 
   onDrop(event: { from: string; to: string; index: number }): void {
-    if (event.from != event.to) {
-      if (event.from === 'Details')
-        this.homeFacade.closeIssueDetails(this.detailsList[event.index]);
-      else if (event.from === 'Available')
+    const issue = this.labels[event.from].issues[event.index];
+
+    this.homeFacade.sendMessage('unlockMobileIssue', issue.number.toString());
+
+    if (event.from === event.to) return;
+
+    if (event.from === 'Details')
+      this.homeFacade.closeIssueDetails(this.detailsList[event.index]);
+    else
+      if (event.from === 'Available')
         this.homeFacade.addMoscowLabel(
           this.labels[event.from].issues[event.index],
           event.to as Moscow
@@ -72,14 +75,13 @@ export class HomeComponent implements OnInit {
           this.labels[event.from].issues[event.index],
           event.to as Moscow
         );
-    }
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
+    const issue = this.labels[event.from].issues[event.index];
+    this.homeFacade.sendMessage('unlockMobileIssue', issue.number.toString());
     if (event.from != event.to)
-      this.homeFacade.openIssueDetails(
-        this.labels[event.from].issues[event.index]
-      );
+      this.homeFacade.openIssueDetails(issue);
   }
 
   arrayRemove(arr: Issue[], value: Issue) {

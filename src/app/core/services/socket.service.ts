@@ -9,31 +9,26 @@ export class SocketService {
   private message$: BehaviorSubject<string> = new BehaviorSubject('');
   private socket: Socket<DefaultEventsMap, DefaultEventsMap> | undefined;
 
-    constructor() { }
+  constructor() { }
 
-    setupSocketConnection(){
-      this.socket = io(environment.SOCKET_ENDPOINT);
+  setupSocketConnection(){
+    this.socket = io(environment.SOCKET_ENDPOINT);
+  }
+
+   public sendMessage(event: string, message: string): void {
+      if (this.socket) {
+        this.socket.emit(event, message);
+      }
+  }
+
+  public getMessage = () => {
+    if (this.socket) {
+      this.socket.on('updateWebIssues', (message) => {
+        window.location.reload();
+        alert('update');
+      });
     }
-
-     public sendMessage(message: string): void {
-        if (this.socket) {
-          this.socket.emit('msgToMobile', message);
-          
-    }}
-
-    public sendUpdateMessage(t:string, m:string): void {
-      if (this.socket) this.socket.emit('msgToMobile', {type: t, text: m});
-    }
-
-    public getMessage = () => {
-      if (this.socket)
-        this.socket.on('msgFromMobile', (message) => {
-            this.message$.next(message);
-            console.log(message);
-        });
-
-        return this.message$.asObservable();
-    };
+  };
 
   disconnect() {
     if (this.socket) {

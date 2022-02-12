@@ -16,12 +16,8 @@ export class HomeFacade {
 
   // Socket
 
-  getMessage$(): Observable<string> {
-    return this.socketService.getMessage();
-  }
-
-  sendMessage(message: string): void {
-    this.socketService.sendMessage(message);
+  sendMessage(event:string, message: string): void {
+    this.socketService.sendMessage(event, message);
   }
 
   // Issues
@@ -132,15 +128,11 @@ export class HomeFacade {
       .subscribe((resultIssue) =>
         this.issuesAPI
           .addLabelToIssue(resultIssue, moscow)
-          .subscribe((finalIssue) => {})
+          .subscribe((finalIssue) => {
+            this.socketService.sendMessage('updateMobileIssues', '');
+          })
       );
     issue.moscow = moscow;
     this.homeState.updateIssue(issue);
-  }
-
-  lockIssue(issue: Issue) {
-    issue.selected = !issue.selected;
-    this.homeState.updateIssue(issue);
-    this.socketService.sendMessage('Locked' + issue.name);
   }
 }
