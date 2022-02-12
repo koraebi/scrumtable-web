@@ -25,6 +25,7 @@ export class SocketService {
     if (this.socket) {
       this.socket.on('updateWebIssues', (message) => {
         window.location.reload();
+        alert('update');
       });
     }
   };
