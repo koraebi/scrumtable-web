@@ -128,7 +128,9 @@ export class HomeFacade {
       .subscribe((resultIssue) =>
         this.issuesAPI
           .addLabelToIssue(resultIssue, moscow)
-          .subscribe((finalIssue) => {})
+          .subscribe((finalIssue) => {
+            this.socketService.sendMessage('updateMobileIssues', '');
+          })
       );
     issue.moscow = moscow;
     this.homeState.updateIssue(issue);

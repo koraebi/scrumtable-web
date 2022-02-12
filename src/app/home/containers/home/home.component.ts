@@ -61,7 +61,6 @@ export class HomeComponent implements OnInit {
     if (event.from === 'Details')
       this.homeFacade.closeIssueDetails(this.detailsList[event.index]);
     else
-      this.homeFacade.sendMessage('updateMobileIssues', '');
       if (event.from === 'Available')
         this.homeFacade.addMoscowLabel(
           this.labels[event.from].issues[event.index],
