@@ -133,9 +133,4 @@ export class HomeFacade {
     issue.moscow = moscow;
     this.homeState.updateIssue(issue);
   }
-
-  lockIssue(issue: Issue) {
-    issue.selected = !issue.selected;
-    this.homeState.updateIssue(issue);
-  }
 }

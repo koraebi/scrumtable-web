@@ -48,14 +48,21 @@ export class HomeComponent implements OnInit {
   }
 
   onIssueSelected(issue: Issue): void {
-    this.homeFacade.lockIssue(issue);
+    this.homeFacade.sendMessage('lockMobileIssue', issue.number.toString());
   }
 
   onDrop(event: { from: string; to: string; index: number }): void {
-    if (event.from != event.to) {
-      if (event.from === 'Details')
-        this.homeFacade.closeIssueDetails(this.detailsList[event.index]);
-      else if (event.from === 'Available')
+    const issue = this.labels[event.from].issues[event.index];
+
+    this.homeFacade.sendMessage('unlockMobileIssue', issue.number.toString());
+
+    if (event.from === event.to) return;
+
+    if (event.from === 'Details')
+      this.homeFacade.closeIssueDetails(this.detailsList[event.index]);
+    else
+      this.homeFacade.sendMessage('updateMobileIssues', '');
+      if (event.from === 'Available')
         this.homeFacade.addMoscowLabel(
           this.labels[event.from].issues[event.index],
           event.to as Moscow
@@ -69,16 +76,13 @@ export class HomeComponent implements OnInit {
           this.labels[event.from].issues[event.index],
           event.to as Moscow
         );
-    }
-
-    this.homeFacade.sendMessage('updateMobileIssues', '');
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
+    const issue = this.labels[event.from].issues[event.index];
+    this.homeFacade.sendMessage('unlockMobileIssue', issue.number.toString());
     if (event.from != event.to)
-      this.homeFacade.openIssueDetails(
-        this.labels[event.from].issues[event.index]
-      );
+      this.homeFacade.openIssueDetails(issue);
   }
 
   arrayRemove(arr: Issue[], value: Issue) {
