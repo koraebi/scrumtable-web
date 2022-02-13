@@ -95,11 +95,13 @@ export class HomeFacade {
   openIssueDetails(issue: Issue): void {
     issue.details = true;
     this.homeState.updateIssue(issue);
+    this.socketService.sendMessage('selectIssue', JSON.stringify(issue));
   }
 
   closeIssueDetails(issue: Issue): void {
     issue.details = false;
     this.homeState.updateIssue(issue);
+    this.socketService.sendMessage('unselectIssue', JSON.stringify(issue));
   }
 
   addMoscowLabel(issue: Issue, moscow: Moscow): void {
@@ -129,7 +131,6 @@ export class HomeFacade {
         this.issuesAPI
           .addLabelToIssue(resultIssue, moscow)
           .subscribe((finalIssue) => {
-            this.socketService.sendMessage('updateMobileIssues', '');
             this.socketService.sendMessage('updateTabletIssues', '');
           })
       );
