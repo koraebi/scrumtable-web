@@ -130,6 +130,7 @@ export class HomeFacade {
           .addLabelToIssue(resultIssue, moscow)
           .subscribe((finalIssue) => {
             this.socketService.sendMessage('updateMobileIssues', '');
+            this.socketService.sendMessage('updateTabletIssues', '');
           })
       );
     issue.moscow = moscow;

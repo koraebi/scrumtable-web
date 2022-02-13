@@ -48,13 +48,13 @@ export class HomeComponent implements OnInit {
   }
 
   onIssueSelected(issue: Issue): void {
-    this.homeFacade.sendMessage('lockMobileIssue', issue.number.toString());
+    this.homeFacade.sendMessage('lockTabletIssue', issue.number.toString());
   }
 
   onDrop(event: { from: string; to: string; index: number }): void {
     const issue = this.labels[event.from].issues[event.index];
 
-    this.homeFacade.sendMessage('unlockMobileIssue', issue.number.toString());
+    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
 
     if (event.from === event.to) return;
 
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
     const issue = this.labels[event.from].issues[event.index];
-    this.homeFacade.sendMessage('unlockMobileIssue', issue.number.toString());
+    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
     if (event.from != event.to)
       this.homeFacade.openIssueDetails(issue);
   }
