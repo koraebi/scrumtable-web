@@ -1,6 +1,5 @@
 
 .name {
-  color: aquamarine;
   width: 10%;
 }
 
@@ -18,9 +17,8 @@
   max-height: 70%;
 }
 .details_container {
-  height: 30%;
-  max-height: 30%;
-  background: red;
+  height: 29%;
+  max-height: 29%;
 }
 
 .title_container {
@@ -31,10 +29,4 @@ h2 {
 }
 .moscow_fields_container {
   height: 93%;
-  background: antiquewhite;
-}
-
-
-.field_container {
-  background: aquamarine;
 }

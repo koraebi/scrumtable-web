@@ -1,11 +1,24 @@
 .issue {
   cursor: move;
   margin-left: 10px;
-  max-height : 100px;
-  width: 180px;
-  border: 2px solid;
-  border-radius: 2px;
-  padding: 0;
+  max-width: 80px;
+  max-height: 50px;
+  border: 5px solid;
+  border-radius: 15px;
+}
+
+span {
+  font-size: 20px;
+}
+
+.number_container {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.img_container {
+  display: inline-block;
+  margin-left: 5px;
 }
 
 .issue:active {
@@ -30,37 +43,12 @@
   margin: -1px;
 }
 
-
-.issue_text {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-top: 50px;
-  margin-left: 1px;}
-
-.issue_f {
-  margin-top: 5px;
-  position: absolute;
-  height : 20px;
-  width: 46px;
-  display: inline-block;
-}
-
 .assignee_avatar {
   width: 30px;
   height: 30px;
   border-radius: 15px;
 }
 
-.mat_icon2 {
-  font-size: 36px;
-}
-
-.issue_param {
-  margin-top: 30px;
-  margin-left: 15px;
-}
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
