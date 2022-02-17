@@ -1,21 +1,10 @@
- <div *ngIf="this.content">
-   <hr *ngIf="name!=='Available'" class="line">
-   <hr *ngIf="name==='Available'" class="full-line">
-   <div *ngIf="name!=='Available'" class="d-flex cont">
-     <div  class="p-2 name-div" [style.color]="this.content.color"><span class="name-span">{{this.name}}</span></div>
-     <div class="p-2 flex-grow-1 list" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
-       <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
-     </div>
-   </div>
-   <div *ngIf="name==='Available'" class="d-flex cont_available">
-     <div class="p-2 flex-grow-1 list" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
-       <app-mini-issue *ngFor="let issue of this.content.issues | paginate: { itemsPerPage: 9, currentPage: p }" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
-     </div>
-   </div>
-   <div *ngIf="name==='Available'" style="text-align: center">
-     <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel=""
-                          nextLabel=""></pagination-controls>
-   </div>
+<div style="height: 20%;" *ngIf="this.content">
+  <hr *ngIf="name!=='Available'" class="line">
+  <hr *ngIf="name==='Available'" class="full-line">
+  <div *ngIf="name!=='Available'" class="d-flex cont">
+    <div  class="p-2 name-div" [style.color]="this.content.color"><span class="name-span">{{this.name}}</span></div>
+    <div class="p-2 flex-grow-1 list" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
+      <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
+    </div>
   </div>
-
-
+</div>
