@@ -1,7 +1,7 @@
 <div cdkDropListGroup class="h-100 global_container">
   <div class="moscow_container">
     <div class="title_container">
-      <h2 style="text-align: center; max-height: 100%">MoSCoW BY SCRUMTABLE</h2>
+      <h2 style="text-align: center; max-height: 100%; color: #4734D3">MoSCoW BY SCRUMTABLE</h2>
     </div>
     <div class="moscow_fields_container">
       <app-issue-list *ngFor="let name of listName" [name]="name" [content]="this.labels[name]" (drop)="onDrop($event)" (issueSelected)="onIssueSelected($event)"></app-issue-list>

@@ -1,6 +1,10 @@
 import {ILabel} from "../model/label.model";
 
 export const labels: ILabel = {
+  "Available": {
+    color: "#616A6B",
+    issues: []
+  },
   "Must": {
     color: "#17A589",
     issues: []
@@ -15,10 +19,6 @@ export const labels: ILabel = {
   },
   "Won't": {
     color: "#E74C3C",
-    issues: []
-  },
-  "Available": {
-    color: "#616A6B",
     issues: []
   },
 }
