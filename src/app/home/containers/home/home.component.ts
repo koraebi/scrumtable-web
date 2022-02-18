@@ -52,37 +52,27 @@ export class HomeComponent implements OnInit {
   }
 
   onDrop(event: { from: string; to: string; index: number }): void {
-    const issue = this.labels[event.from].issues[event.index];
+    const issue =
+      event.from === 'Details'
+        ? this.detailsList[event.index]
+        : this.labels[event.from].issues[event.index];
 
     this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
 
     if (event.from === event.to) return;
 
-    if (event.from === 'Details')
-      this.homeFacade.closeIssueDetails(this.detailsList[event.index]);
-    else
-      if (event.from === 'Available')
-        this.homeFacade.addMoscowLabel(
-          this.labels[event.from].issues[event.index],
-          event.to as Moscow
-        );
-      else if (event.to === 'Available')
-        this.homeFacade.removeMoscowLabel(
-          this.labels[event.from].issues[event.index]
-        );
-      else
-        this.homeFacade.changeMoscowLabel(
-          this.labels[event.from].issues[event.index],
-          event.to as Moscow
-        );
-      console.log(this.labels['Available'].issues.length);
+    if (event.from === 'Details') this.homeFacade.closeIssueDetails(issue);
+    else if (event.from === 'Available')
+      this.homeFacade.addMoscowLabel(issue, event.to as Moscow);
+    else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(issue);
+    else this.homeFacade.changeMoscowLabel(issue, event.to as Moscow);
+
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
     const issue = this.labels[event.from].issues[event.index];
     this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
-    if (event.from != event.to)
-      this.homeFacade.openIssueDetails(issue);
+    if (event.from != event.to) this.homeFacade.openIssueDetails(issue);
   }
 
   arrayRemove(arr: Issue[], value: Issue) {

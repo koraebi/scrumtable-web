@@ -16,7 +16,7 @@ export class HomeFacade {
 
   // Socket
 
-  sendMessage(event:string, message: string): void {
+  sendMessage(event: string, message: string): void {
     this.socketService.sendMessage(event, message);
   }
 
@@ -106,8 +106,8 @@ export class HomeFacade {
 
   addMoscowLabel(issue: Issue, moscow: Moscow): void {
     // add the new moscow label
-    issue.moscow =  moscow;
-    this.homeState.updateIssue(issue)
+    issue.moscow = moscow;
+    this.homeState.updateIssue(issue);
     this.issuesAPI.addLabelToIssue(issue, moscow).subscribe(
       // then update state
       (resultIssue) => {}
