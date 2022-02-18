@@ -1,19 +1,12 @@
 <div *ngIf="issue" class="issue" [style.border-color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)">
-  <div class="issue_bar" [style.background]="color"></div>
-  <div class="issue_desc">
-   <span class="issue_text">
-    {{issue.name}}
-   </span>
+  <div class="number_container">
+   <span [style.color]="color"><b>#{{issue.number}}</b></span>
   </div>
-  <div class="issue_f">
-    <div class="issue_img">
-      <mat-icon *ngIf="!issue.assignee" [style.color]="color" class="mat_icon2">account_circle</mat-icon>
+  <div class="img_container">
+    <div>
+      <img class="assignee_avatar" *ngIf="!issue.assignee" [style.color]="color" src="assets/images/icon_no_matcher.png">
       <img class="assignee_avatar" *ngIf="issue.assignee" src="{{issue.assignee.avatar_url}}">
     </div>
-    <div class="issue_param">
-      <mat-icon [style.color]="color" style="font-size: 16px">settings</mat-icon>
-    </div>
   </div>
-
 </div>
 

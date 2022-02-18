@@ -1,7 +1,7 @@
 .details {
   margin-top: 5px;
-  border: solid 3px #BDC3C7 ;
-  min-height: 194px;
+  border: solid 3px #BDC3C7;
+  height: 100%;
   border-radius: 10px;
   overflow-x: auto;
 }

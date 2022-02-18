@@ -8,6 +8,7 @@
     overflow: hidden;
 }
 
+
 .name-div {
   color: aquamarine;
   width: 10%;
@@ -15,13 +16,6 @@
 
 .name-span {
   margin-left: 10px;
-}
-
-.cont {
-  height: 130px;
-}
-.cont_available {
-  height: 150px;
 }
 
 .line {

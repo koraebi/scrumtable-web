@@ -1,6 +1,5 @@
 
 .name {
-  color: aquamarine;
   width: 10%;
 }
 
@@ -9,3 +8,25 @@
 }
 
 
+.global_container {
+
+}
+
+.moscow_container {
+  height: 70%;
+  max-height: 70%;
+}
+.details_container {
+  height: 29%;
+  max-height: 29%;
+}
+
+.title_container {
+  height: 7%;
+}
+h2 {
+  color: #909497;
+}
+.moscow_fields_container {
+  height: 93%;
+}

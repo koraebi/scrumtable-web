@@ -1,11 +1,24 @@
 .issue {
   cursor: move;
   margin-left: 10px;
-  max-height : 110px;
-  width: 250px;
-  border: 2px solid;
-  border-radius: 4px;
-  padding: 0;
+  max-width: 80px;
+  max-height: 40px;
+  border: 5px solid;
+  border-radius: 15px;
+}
+
+span {
+  font-size: 20px;
+}
+
+.number_container {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.img_container {
+  display: inline-block;
+  margin-left: 5px;
 }
 
 .issue:active {
@@ -15,35 +28,19 @@
 .issue_desc {
   position: relative;
   margin-bottom: 22px;
-  width: 200px;
+  width: 130px;
   margin-left: 7px;
   display: inline-block;
-  max-height: 105px;
+  max-height: 100px;
   overflow: hidden;
 }
 
 .issue_bar {
   width: 4px;
-  height: 108px;
+  height: 100px;
   display: inline-block;
   box-sizing: border-box;
   margin: -1px;
-}
-
-
-.issue_text {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.issue_f {
-  margin-top: 5px;
-  position: absolute;
-  height : 50px;
-  width: 46px;
-  display: inline-block;
 }
 
 .assignee_avatar {
@@ -52,14 +49,6 @@
   border-radius: 15px;
 }
 
-.mat_icon2 {
-  font-size: 36px;
-}
-
-.issue_param {
-  margin-top: 40px;
-  margin-left: 15px;
-}
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;

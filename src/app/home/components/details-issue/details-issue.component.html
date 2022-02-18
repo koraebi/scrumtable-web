@@ -1,19 +1,12 @@
-<div *ngIf="issue" class="card border-success mb-3" style="max-width: 18rem; cursor: move" cdkDrag (cdkDragStarted)="selected.emit(issue)">
+<div *ngIf="issue" class="card border-success mb-3 detail_container" cdkDrag (cdkDragStarted)="selected.emit(issue)">
   <div class="d-flex justify-content-between card-header bg-transparent border-success header_p">
-    <span style="margin: 7px">Issue : #{{issue.number}}</span>
-    <mat-icon *ngIf="!issue.assignee" class="mat_icon2">account_circle</mat-icon>
+    <span>Issue : #{{issue.number}}</span>
+    <img class="assignee_avatar" *ngIf="!issue.assignee" src="assets/images/icon_no_matcher.png">
     <img class="assignee_avatar" *ngIf="issue.assignee" src="{{issue.assignee.avatar_url}}">
   </div>
   <div class="card-body text-success">
-    <h2 class="card-title" >{{issue.name}}</h2>
-    <p class="card-text" style="color: black"> {{issue.description}}</p>
+    <p class="card-title" >{{issue.name}}</p>
     <span><i>-- 1 Comment </i></span>
-  </div>
-  <div class="div_container">
-    <span class="badge rounded-pill bg-primary issue_label">Primary</span>
-    <span class="badge rounded-pill bg-secondary issue_label">Secondary</span>
-    <span class="badge rounded-pill bg-success issue_label">Success</span>
-    <span class="badge rounded-pill bg-danger issue_label">Danger</span>
   </div>
   <div *ngIf="issue.assignees" class="card-footer">
     <img *ngFor="let assignee of issue.assignees" class="assignees_avatar" src="{{assignee.avatar_url}}">
