@@ -75,6 +75,7 @@ export class HomeComponent implements OnInit {
           this.labels[event.from].issues[event.index],
           event.to as Moscow
         );
+      console.log(this.labels['Available'].issues.length);
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {

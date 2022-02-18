@@ -9,7 +9,7 @@
   </div>
   <div *ngIf="name==='Available'" class="d-flex">
     <div class="p-2 flex-grow-1 list" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
-      <app-mini-issue *ngFor="let issue of this.content.issues | paginate: { itemsPerPage: 9, currentPage: p }" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
+      <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
     </div>
   </div>
 </div>
