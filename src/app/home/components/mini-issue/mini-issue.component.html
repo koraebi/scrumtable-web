@@ -1,4 +1,7 @@
 <div *ngIf="issue" class="issue" [style.border-color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)">
+  <strong class="issue_container" *cdkDragPreview >
+    #{{issue.number}} : {{issue.name}}
+  </strong>
   <div class="number_container">
    <span [style.color]="color"><b>#{{issue.number}}</b></span>
   </div>
