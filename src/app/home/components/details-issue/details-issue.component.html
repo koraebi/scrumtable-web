@@ -1,14 +1,30 @@
-<div *ngIf="issue" class="card border-success mb-3 detail_container" cdkDrag (cdkDragStarted)="selected.emit(issue)">
-  <div class="d-flex justify-content-between card-header bg-transparent border-success header_p">
-    <span>Issue : #{{issue.number}}</span>
-    <img class="assignee_avatar" *ngIf="!issue.assignee" src="assets/images/icon_no_matcher.png">
-    <img class="assignee_avatar" *ngIf="issue.assignee" src="{{issue.assignee.avatar_url}}">
+<div
+  *ngIf="issue"
+  class="card border-success mb-3 detail_container"
+  cdkDrag
+  (cdkDragStarted)="selected.emit(issue)"
+>
+  <div
+    class="d-flex justify-content-between card-header bg-transparent border-success header_p"
+  >
+    <span>Issue : #{{ issue.number }}</span>
   </div>
   <div class="card-body text-success">
-    <p class="card-title" >{{issue.name}}</p>
+    <p class="card-title">{{ issue.name }}</p>
     <span><i>-- 1 Comment </i></span>
+    <div *ngIf="issue.labels">
+    <span
+      class="badge rounded-pill bg-info text-dark"
+      *ngFor="let labels of issue.labels"
+      ><i> {{ labels.name }} </i></span
+    >
+  </div>
   </div>
   <div *ngIf="issue.assignees" class="card-footer">
-    <img *ngFor="let assignee of issue.assignees" class="assignees_avatar" src="{{assignee.avatar_url}}">
+    <img
+      *ngFor="let assignee of issue.assignees"
+      class="assignees_avatar"
+      src="{{ assignee.avatar_url }}"
+    />
   </div>
 </div>

@@ -27,6 +27,7 @@ export class IssueAPI {
               issue.description,
               issue.assignee,
               issue.assignees,
+              issue.labels,
               issue.selected,
               result.length === 0 ? undefined : (result[0] as Moscow)
             )
@@ -46,6 +47,7 @@ export class IssueAPI {
               issue.description,
               issue.assignee,
               issue.assignees,
+              issue.labels,
               issue.selected,
               result.length === 0 ? undefined : (result[0] as Moscow)
             )
