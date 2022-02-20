@@ -1,7 +1,13 @@
 <div *ngIf="issue" class="issue" [style.border-color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)">
-  <strong class="issue_container" *cdkDragPreview >
-    #{{issue.number}} : {{issue.name}}
-  </strong>
+  <div class="card"  *cdkDragPreview style="width: 20%;height : 20%;">
+    <div class="card-body">
+    <strong class="issue_container">
+
+    <h4><b>Issue #{{issue.number}} :</b></h4>
+    <p>{{issue.name}}</p>
+    </strong>
+  </div>
+  </div>
   <div class="number_container">
    <span [style.color]="color"><b>#{{issue.number}}</b></span>
   </div>
