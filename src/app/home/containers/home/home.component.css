@@ -29,3 +29,17 @@ h2 {
 .moscow_fields_container {
     height: 93%;
 }
+
+.splited-container {
+    display: flex;
+    height: 93%;
+    width: 100%;
+}
+
+.part-A {
+    width: 50%;
+}
+
+.part-B {
+    width: 50%;
+}

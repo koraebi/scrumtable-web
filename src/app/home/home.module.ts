@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './containers/home/home.component';
 import { HomeRoutingModule } from './home-routing.module';
-import { HomeFacade } from './home.facade';
+import { HomeFacade } from './facades/home.facade';
+import { MoscowDataFacade } from './facades/moscow-data.facade';
 import { IssueComponent } from './components/issue/issue.component';
 import { SharedModule } from '../shared/shared.module';
 import { HomeState } from './state/home.state';
@@ -38,6 +39,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     DetailsIssueComponent,
     TitleToolbarComponent,
   ],
-  providers: [HomeFacade, HomeState],
+  providers: [HomeFacade, MoscowDataFacade, HomeState],
 })
 export class HomeModule {}

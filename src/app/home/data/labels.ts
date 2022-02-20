@@ -1,24 +1,70 @@
-import {ILabel} from "../model/label.model";
+import { ILabel } from '../model/label.model';
 
-export const labels: ILabel = {
-  "Available": {
-    color: "#616A6B",
-    issues: []
+export const globalLabels: ILabel = {
+  Available: {
+    color: '#616A6B',
+    issues: [],
   },
-  "Must": {
-    color: "#17A589",
-    issues: []
+  Must: {
+    color: '#17A589',
+    issues: [],
   },
-  "Should": {
-    color: "#2980B9",
-    issues: []
+  Should: {
+    color: '#2980B9',
+    issues: [],
   },
-  "Could": {
-    color: "#F39C12",
-    issues: []
+  Could: {
+    color: '#F39C12',
+    issues: [],
   },
   "Won't": {
-    color: "#E74C3C",
-    issues: []
+    color: '#E74C3C',
+    issues: [],
   },
-}
+};
+
+export const labelsPartA: ILabel = {
+  Available: {
+    color: '#616A6B',
+    issues: [],
+  },
+  Must: {
+    color: '#17A589',
+    issues: [],
+  },
+  Should: {
+    color: '#2980B9',
+    issues: [],
+  },
+  Could: {
+    color: '#F39C12',
+    issues: [],
+  },
+  "Won't": {
+    color: '#E74C3C',
+    issues: [],
+  },
+};
+
+export const labelsPartB: ILabel = {
+  Available: {
+    color: '#616A6B',
+    issues: [],
+  },
+  Must: {
+    color: '#17A589',
+    issues: [],
+  },
+  Should: {
+    color: '#2980B9',
+    issues: [],
+  },
+  Could: {
+    color: '#F39C12',
+    issues: [],
+  },
+  "Won't": {
+    color: '#E74C3C',
+    issues: [],
+  },
+};

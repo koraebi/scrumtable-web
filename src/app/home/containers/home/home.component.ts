@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Issue } from 'src/app/home/model/issue.model';
-import { HomeFacade } from '../../home.facade';
+import { HomeFacade } from '../../facades/home.facade';
 import { ILabel } from '../../model/label.model';
-import { labels } from '../../data/labels';
+import { globalLabels, labelsPartA, labelsPartB } from '../../data/labels';
 import { Moscow } from '../../enum/moscow.enum';
+import { MoscowDataFacade } from '../../facades/moscow-data.facade';
 
 @Component({
   selector: 'app-home',
@@ -11,41 +12,106 @@ import { Moscow } from '../../enum/moscow.enum';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  labels: ILabel = labels;
+  labels: ILabel = globalLabels;
   detailsList: Issue[] = [];
   message: string = '';
+
   reversed = false;
+  splited = false;
+
+  partALabels: ILabel = labelsPartA;
+  partBLabels: ILabel = labelsPartB;
+  partADetailsList: Issue[] = [];
+  partBDetailsList: Issue[] = [];
 
   get listName(): string[] {
     return Object.keys(this.labels);
   }
 
-  constructor(private homeFacade: HomeFacade) {}
+  constructor(
+    private homeFacade: HomeFacade,
+    private moscowDataFacade: MoscowDataFacade
+  ) {}
 
   ngOnInit() {
-    this.homeFacade
-      .getAvailableIssues$()
-      .subscribe((issues) => (this.labels['Available'].issues = issues));
-    this.homeFacade
-      .getMustIssues$()
-      .subscribe((issues) => (this.labels['Must'].issues = issues));
-    this.homeFacade
-      .getShouldIssues$()
-      .subscribe((issues) => (this.labels['Should'].issues = issues));
-    this.homeFacade
-      .getCouldIssues$()
-      .subscribe((issues) => (this.labels['Could'].issues = issues));
-    this.homeFacade
-      .getWontIssues$()
-      .subscribe((issues) => (this.labels["Won't"].issues = issues));
-    this.homeFacade
-      .getDetailsIssues$()
-      .subscribe((issues) => (this.detailsList = issues));
-    this.homeFacade.loadIssues();
+    this.moscowDataFacade.loadIssues();
 
     this.homeFacade
-      .isReversed()
+      .isReversed$()
       .subscribe((reversed) => (this.reversed = reversed));
+
+    this.homeFacade
+      .isSplited$()
+      .subscribe((splited) => (this.splited = splited));
+
+    /*
+     * GLOBAL
+     */
+
+    this.moscowDataFacade
+      .getAvailableIssues$()
+      .subscribe((issues) => (this.labels['Available'].issues = issues));
+    this.moscowDataFacade
+      .getMustIssues$()
+      .subscribe((issues) => (this.labels['Must'].issues = issues));
+    this.moscowDataFacade
+      .getShouldIssues$()
+      .subscribe((issues) => (this.labels['Should'].issues = issues));
+    this.moscowDataFacade
+      .getCouldIssues$()
+      .subscribe((issues) => (this.labels['Could'].issues = issues));
+    this.moscowDataFacade
+      .getWontIssues$()
+      .subscribe((issues) => (this.labels["Won't"].issues = issues));
+    this.moscowDataFacade
+      .getDetailsIssues$()
+      .subscribe((issues) => (this.detailsList = issues));
+
+    /*
+     * SPLIT PART A
+     */
+
+    this.moscowDataFacade
+      .getAvailableIssuesPartA$()
+      .subscribe((issues) => (this.partALabels['Available'].issues = issues));
+    this.moscowDataFacade
+      .getMustIssuesPartA$()
+      .subscribe((issues) => (this.partALabels['Must'].issues = issues));
+    this.moscowDataFacade
+      .getShouldIssuesPartA$()
+      .subscribe((issues) => (this.partALabels['Should'].issues = issues));
+    this.moscowDataFacade
+      .getCouldIssuesPartA$()
+      .subscribe((issues) => (this.partALabels['Could'].issues = issues));
+    this.moscowDataFacade
+      .getWontIssuesPartA$()
+      .subscribe((issues) => (this.partALabels["Won't"].issues = issues));
+    this.moscowDataFacade
+      .getDetailsIssuesPartA$()
+      .subscribe((issues) => (this.partADetailsList = issues));
+
+    /*
+     * SPLIT PART B
+     */
+
+    this.moscowDataFacade
+      .getAvailableIssuesPartB$()
+      .subscribe((issues) => (this.partBLabels['Available'].issues = issues));
+    this.moscowDataFacade
+      .getMustIssuesPartB$()
+      .subscribe((issues) => (this.partBLabels['Must'].issues = issues));
+    this.moscowDataFacade
+      .getShouldIssuesPartB$()
+      .subscribe((issues) => (this.partBLabels['Should'].issues = issues));
+    this.moscowDataFacade
+      .getCouldIssuesPartB$()
+      .subscribe((issues) => (this.partBLabels['Could'].issues = issues));
+    this.moscowDataFacade
+      .getWontIssuesPartB$()
+      .subscribe((issues) => (this.partBLabels["Won't"].issues = issues));
+    this.moscowDataFacade
+      .getDetailsIssuesPartB$()
+      .subscribe((issues) => (this.partBDetailsList = issues));
   }
 
   sendMessage() {
@@ -73,6 +139,37 @@ export class HomeComponent implements OnInit {
     else this.homeFacade.changeMoscowLabel(issue, event.to as Moscow);
   }
 
+  onDropSplited(event: { from: string; to: string; index: number }) {
+    const splitFrom: 'A' | 'B' = event.from.split('-')[1] as 'A' | 'B';
+    const splitTo: 'A' | 'B' = event.to.split('-')[1] as 'A' | 'B';
+
+    const from = event.from.split('-')[0];
+    const to = event.to.split('-')[0];
+
+    let issue;
+
+    if (from === 'Details')
+      issue =
+        splitFrom === 'A'
+          ? this.partADetailsList[event.index]
+          : this.partBDetailsList[event.index];
+    else
+      issue =
+        splitFrom === 'A'
+          ? this.partALabels[from].issues[event.index]
+          : this.partBLabels[from].issues[event.index];
+
+    if (from != to) {
+      if (from === 'Details') this.homeFacade.closeIssueDetails(issue);
+      else if (from === 'Available')
+        this.homeFacade.addMoscowLabel(issue, to as Moscow);
+      else if (to === 'Available') this.homeFacade.removeMoscowLabel(issue);
+      else this.homeFacade.changeMoscowLabel(issue, to as Moscow);
+    }
+
+    this.homeFacade.updateSplitPart(issue, splitTo);
+  }
+
   onDetailsDrop(event: { from: string; to: string; index: number }) {
     const issue = this.labels[event.from].issues[event.index];
     this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
@@ -91,5 +188,9 @@ export class HomeComponent implements OnInit {
 
   onReverse(): void {
     this.homeFacade.reverse();
+  }
+
+  onSplitScreen(): void {
+    this.homeFacade.splitScreen();
   }
 }

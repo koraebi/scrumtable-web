@@ -1,10 +1,20 @@
 <div cdkDropListGroup class="h-100 global_container">
     <div class="moscow_container">
-        <app-title-toolbar title="MoSCoW BY SCRUMTABLE" (reverse)="onReverse()" [reversed]="reversed">
+        <app-title-toolbar title="MoSCoW BY SCRUMTABLE" (reverse)="onReverse()" (splitScreen)="onSplitScreen()" [reversed]="reversed">
         </app-title-toolbar>
-        <div class="moscow_fields_container">
-            <app-issue-list *ngFor="let name of listName" [reversed]="reversed" [name]="name" [content]="this.labels[name]" (drop)="onDrop($event)" (issueSelected)="onIssueSelected($event)">
+        <div *ngIf="!splited" class="moscow_fields_container">
+            <app-issue-list *ngFor="let name of listName" [reversed]="reversed" [name]="name" [id]="name" [content]="this.labels[name]" (drop)="onDrop($event)" (issueSelected)="onIssueSelected($event)">
             </app-issue-list>
+        </div>
+        <div *ngIf="splited" class="splited-container">
+            <div class="part-A">
+                <app-issue-list *ngFor="let name of listName" [reversed]="false" [name]="name" [id]="name+'-A'" [content]="this.partALabels[name]" (drop)="onDropSplited($event)" (issueSelected)="onIssueSelected($event)">
+                </app-issue-list>
+            </div>
+            <div class="part-B">
+                <app-issue-list *ngFor="let name of listName" [reversed]="true" [name]="name" [id]="name+'-B'" [content]="this.partBLabels[name]" (drop)="onDropSplited($event)" (issueSelected)="onIssueSelected($event)">
+                </app-issue-list>
+            </div>
         </div>
     </div>
     <div class="details_container">

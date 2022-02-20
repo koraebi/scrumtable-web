@@ -27,8 +27,14 @@ export class HomeState {
     return this.splited.asObservable();
   }
 
-  setSplited(splited: boolean): void {
-    this.splited.next(splited);
+  split(): void {
+    this.splited.next(!this.splited.getValue());
+    this.issues.next(
+      this.issues.getValue().map((issue) => {
+        issue.splitPart = 'A';
+        return issue;
+      })
+    );
   }
 
   isReversed$(): Observable<boolean> {

@@ -13,6 +13,9 @@ export class IssueListComponent implements OnInit {
   name: string = '';
 
   @Input()
+  id: string = '';
+
+  @Input()
   content?: IContent;
 
   @Input()

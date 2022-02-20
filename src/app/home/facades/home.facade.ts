@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { IssueAPI } from '../core/api/issues.api';
-import { Moscow } from './enum/moscow.enum';
-import { Issue } from './model/issue.model';
-import { SocketService } from '../core/services/socket.service';
-import { HomeState } from './state/home.state';
+import { IssueAPI } from '../../core/api/issues.api';
+import { Moscow } from '../enum/moscow.enum';
+import { Issue } from '../model/issue.model';
+import { SocketService } from '../../core/services/socket.service';
+import { HomeState } from '../state/home.state';
 
 @Injectable()
 export class HomeFacade {
@@ -21,76 +21,6 @@ export class HomeFacade {
   }
 
   // Issues
-
-  loadIssues() {
-    this.issuesAPI
-      .getIssues()
-      .subscribe((issues) => this.homeState.setIssues(issues));
-  }
-
-  getAvailableIssues$(): Observable<Issue[]> {
-    return this.homeState
-      .getIssues$()
-      .pipe(
-        map((issues) =>
-          issues.filter((issue) => issue.moscow === undefined && !issue.details)
-        )
-      );
-  }
-
-  getMustIssues$(): Observable<Issue[]> {
-    return this.homeState
-      .getIssues$()
-      .pipe(
-        map((issues) =>
-          issues.filter(
-            (issue) => issue.moscow === Moscow.MUST && !issue.details
-          )
-        )
-      );
-  }
-
-  getShouldIssues$(): Observable<Issue[]> {
-    return this.homeState
-      .getIssues$()
-      .pipe(
-        map((issues) =>
-          issues.filter(
-            (issue) => issue.moscow === Moscow.SHOULD && !issue.details
-          )
-        )
-      );
-  }
-
-  getCouldIssues$(): Observable<Issue[]> {
-    return this.homeState
-      .getIssues$()
-      .pipe(
-        map((issues) =>
-          issues.filter(
-            (issue) => issue.moscow === Moscow.COULD && !issue.details
-          )
-        )
-      );
-  }
-
-  getWontIssues$(): Observable<Issue[]> {
-    return this.homeState
-      .getIssues$()
-      .pipe(
-        map((issues) =>
-          issues.filter(
-            (issue) => issue.moscow === Moscow.WONT && !issue.details
-          )
-        )
-      );
-  }
-
-  getDetailsIssues$(): Observable<Issue[]> {
-    return this.homeState
-      .getIssues$()
-      .pipe(map((issues) => issues.filter((issue) => issue.details)));
-  }
 
   openIssueDetails(issue: Issue): void {
     issue.details = true;
@@ -138,11 +68,24 @@ export class HomeFacade {
     this.homeState.updateIssue(issue);
   }
 
-  isReversed(): Observable<boolean> {
+  isReversed$(): Observable<boolean> {
     return this.homeState.isReversed$();
   }
 
   reverse(): void {
     this.homeState.reverse();
+  }
+
+  isSplited$(): Observable<boolean> {
+    return this.homeState.isSplited$();
+  }
+
+  splitScreen(): void {
+    this.homeState.split();
+  }
+
+  updateSplitPart(issue: Issue, splitPart: 'A' | 'B'): void {
+    issue.splitPart = splitPart;
+    this.homeState.updateIssue(issue);
   }
 }
