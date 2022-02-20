@@ -8,42 +8,41 @@
     flex-wrap: wrap;
 }
 
-
 .name-div {
-  color: aquamarine;
-  width: 10%;
+    color: aquamarine;
+    width: 10%;
 }
 
 .name-span {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .line {
-  color: #4734D3;
-  margin-left: 10%;
-  margin-top: 0;
-  height: 2px;
-  margin-bottom: 0;
+    color: #4734d3;
+    margin-left: 10%;
+    margin-top: 0;
+    height: 2px;
+    margin-bottom: 0;
 }
 
 .my-pagination /deep/ .ngx-pagination .current,
 .btn-info {
-  background: darkcyan !important;
-  border: transparent !important;
-  border-radius: 20px !important;
+    background: darkcyan !important;
+    border: transparent !important;
+    border-radius: 20px !important;
 }
 
 .my-pagination /deep/ .ngx-pagination .current:hover {
-  background: #85929E !important;
-  border-radius: 20px !important;
-  border: transparent !important;
+    background: #85929e !important;
+    border-radius: 20px !important;
+    border: transparent !important;
 }
 
 .full-line {
-  color: #4734D3;
-  height: 3px;
-  margin-top: 0;
-  margin-bottom: 0;
+    color: #4734d3;
+    height: 3px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .list.cdk-drop-list-dragging {
@@ -53,5 +52,9 @@
 .content {
     display: flex;
     gap: 10px;
-  width: 100%;
+    width: 100%;
+}
+
+.reverse {
+    flex-direction: row-reverse;
 }

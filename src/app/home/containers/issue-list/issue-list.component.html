@@ -1,15 +1,15 @@
 <div style="height: 20%;" *ngIf="this.content">
-  <hr *ngIf="name!=='Available'" class="line">
-  <hr *ngIf="name==='Available'" class="full-line">
-  <div *ngIf="name!=='Available'" class="d-flex">
-    <div  class="p-2 name-div" [style.color]="this.content.color"><span class="name-span">{{this.name}}</span></div>
-    <div class="p-2 flex-grow-1 list overflow-auto" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
-      <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
+    <hr *ngIf="name!=='Available'" class="line">
+    <hr *ngIf="name==='Available'" class="full-line">
+    <div *ngIf="name!=='Available'" class="d-flex" [ngClass]="reversed ? 'reverse' : ''">
+        <div class="p-2 name-div" [style.color]="this.content.color"><span class="name-span">{{this.name}}</span></div>
+        <div class="p-2 flex-grow-1 list overflow-auto" [ngClass]="reversed ? 'reverse' : ''" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
+            <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
+        </div>
     </div>
-  </div>
-  <div *ngIf="name==='Available'" class="d-flex">
-    <div class="p-2 flex-grow-1 list overflow-auto" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
-      <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
+    <div *ngIf="name==='Available'" class="d-flex" [ngClass]="reversed ? 'reverse' : ''">
+        <div class="p-2 flex-grow-1 list overflow-auto" [ngClass]="reversed ? 'reverse' : ''" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)">
+            <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
+        </div>
     </div>
-  </div>
 </div>

@@ -17,6 +17,9 @@ export class DetailsComponent implements OnInit {
   @Input()
   detailsList: Issue[] = [];
 
+  @Input()
+  reversed: boolean = false;
+
   @Output()
   drop = new EventEmitter<{ from: string; to: string; index: number }>();
 

@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   labels: ILabel = labels;
   detailsList: Issue[] = [];
   message: string = '';
+  reversed = false;
 
   get listName(): string[] {
     return Object.keys(this.labels);
@@ -41,6 +42,10 @@ export class HomeComponent implements OnInit {
       .getDetailsIssues$()
       .subscribe((issues) => (this.detailsList = issues));
     this.homeFacade.loadIssues();
+
+    this.homeFacade
+      .isReversed()
+      .subscribe((reversed) => (this.reversed = reversed));
   }
 
   sendMessage() {
@@ -66,7 +71,6 @@ export class HomeComponent implements OnInit {
       this.homeFacade.addMoscowLabel(issue, event.to as Moscow);
     else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(issue);
     else this.homeFacade.changeMoscowLabel(issue, event.to as Moscow);
-
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
@@ -83,5 +87,9 @@ export class HomeComponent implements OnInit {
 
   selectedIssue(event: Issue) {
     console.log(event);
+  }
+
+  onReverse(): void {
+    this.homeFacade.reverse();
   }
 }

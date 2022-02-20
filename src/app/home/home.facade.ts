@@ -137,4 +137,12 @@ export class HomeFacade {
     issue.moscow = moscow;
     this.homeState.updateIssue(issue);
   }
+
+  isReversed(): Observable<boolean> {
+    return this.homeState.isReversed$();
+  }
+
+  reverse(): void {
+    this.homeState.reverse();
+  }
 }
