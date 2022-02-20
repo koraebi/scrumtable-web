@@ -16,6 +16,12 @@
     max-height: 29%;
 }
 
+.details-container-splited {
+    height: 29%;
+    max-height: 29%;
+    display: flex;
+}
+
 .title_container {
     display: flex;
     height: 7%;

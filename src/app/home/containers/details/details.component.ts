@@ -18,6 +18,9 @@ export class DetailsComponent implements OnInit {
   detailsList: Issue[] = [];
 
   @Input()
+  id: string = 'Details';
+
+  @Input()
   reversed: boolean = false;
 
   @Output()

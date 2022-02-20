@@ -17,7 +17,17 @@
             </div>
         </div>
     </div>
-    <div class="details_container">
+    <div *ngIf="!splited" class="details_container">
         <app-details [detailsList]="detailsList" [reversed]="reversed" (drop)="onDetailsDrop($event)"></app-details>
+    </div>
+    <div *ngIf="splited" class="details-container-splited" [ngClass]="reversed ? 'reverse' : ''">
+        <div class="part-A">
+            <app-details [detailsList]="partADetailsList" [id]="'Details-A'" [reversed]="reversed" (drop)="onDetailsDropSplited($event)">
+            </app-details>
+        </div>
+        <div class="part-B">
+            <app-details [detailsList]="partBDetailsList" [id]="'Details-B'" [reversed]="!reversed" (drop)="onDetailsDropSplited($event)">
+            </app-details>
+        </div>
     </div>
 </div>

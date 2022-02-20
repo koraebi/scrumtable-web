@@ -171,9 +171,40 @@ export class HomeComponent implements OnInit {
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
+    if (event.from === event.to) return;
     const issue = this.labels[event.from].issues[event.index];
     this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
     if (event.from != event.to) this.homeFacade.openIssueDetails(issue);
+  }
+
+  onDetailsDropSplited(event: {
+    from: string;
+    to: string;
+    index: number;
+  }): void {
+    const splitFrom: 'A' | 'B' = event.from.split('-')[1] as 'A' | 'B';
+    const splitTo: 'A' | 'B' = event.to.split('-')[1] as 'A' | 'B';
+
+    const from = event.from.split('-')[0];
+    const to = event.to.split('-')[0];
+
+    let issue;
+
+    if (from === 'Details')
+      issue =
+        splitFrom === 'A'
+          ? this.partADetailsList[event.index]
+          : this.partBDetailsList[event.index];
+    else
+      issue =
+        splitFrom === 'A'
+          ? this.partALabels[from].issues[event.index]
+          : this.partBLabels[from].issues[event.index];
+
+    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
+
+    if (from != to) this.homeFacade.openIssueDetailsSplited(issue, splitTo);
+    else this.homeFacade.updateSplitPart(issue, splitTo);
   }
 
   arrayRemove(arr: Issue[], value: Issue) {

@@ -88,4 +88,10 @@ export class HomeFacade {
     issue.splitPart = splitPart;
     this.homeState.updateIssue(issue);
   }
+
+  openIssueDetailsSplited(issue: Issue, splitPart: 'A' | 'B'): void {
+    issue.details = true;
+    issue.splitPart = splitPart;
+    this.homeState.updateIssue(issue);
+  }
 }
