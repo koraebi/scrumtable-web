@@ -11,15 +11,28 @@
 .name-div {
     color: aquamarine;
     width: 10%;
+    display: flex;
 }
 
 .name-span {
     margin-left: 10px;
 }
 
+.name-span-reverse {
+    margin-right: 10px;
+}
+
 .line {
     color: #4734d3;
     margin-left: 10%;
+    margin-top: 0;
+    height: 2px;
+    margin-bottom: 0;
+}
+
+.line-reverse {
+    color: #4734d3;
+    margin-right: 10%;
     margin-top: 0;
     height: 2px;
     margin-bottom: 0;
