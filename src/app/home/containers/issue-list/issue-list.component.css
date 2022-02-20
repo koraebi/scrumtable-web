@@ -15,7 +15,7 @@
 }
 
 .name-span {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .line {
@@ -25,6 +25,14 @@
   height: 1px;
   margin-bottom: 0;
 }
+
+.full-line {
+  color: #4734D3;
+  height: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 
 .my-pagination /deep/ .ngx-pagination .current,
 .btn-info {
@@ -37,13 +45,6 @@
   background: #85929E !important;
   border-radius: 20px !important;
   border: transparent !important;
-}
-
-.full-line {
-  color: #4734D3;
-  height: 5px;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 .list.cdk-drop-list-dragging {
