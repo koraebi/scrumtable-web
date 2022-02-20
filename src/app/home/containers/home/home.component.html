@@ -6,13 +6,13 @@
             <app-issue-list *ngFor="let name of listName" [reversed]="reversed" [name]="name" [id]="name" [content]="this.labels[name]" (drop)="onDrop($event)" (issueSelected)="onIssueSelected($event)">
             </app-issue-list>
         </div>
-        <div *ngIf="splited" class="splited-container">
+        <div *ngIf="splited" class="splited-container" [ngClass]="reversed ? 'reverse' : ''">
             <div class="part-A">
-                <app-issue-list *ngFor="let name of listName" [reversed]="false" [name]="name" [id]="name+'-A'" [content]="this.partALabels[name]" (drop)="onDropSplited($event)" (issueSelected)="onIssueSelected($event)">
+                <app-issue-list *ngFor="let name of listName" [reversed]="reversed" [name]="name" [id]="name+'-A'" [content]="this.partALabels[name]" (drop)="onDropSplited($event)" (issueSelected)="onIssueSelected($event)">
                 </app-issue-list>
             </div>
             <div class="part-B">
-                <app-issue-list *ngFor="let name of listName" [reversed]="true" [name]="name" [id]="name+'-B'" [content]="this.partBLabels[name]" (drop)="onDropSplited($event)" (issueSelected)="onIssueSelected($event)">
+                <app-issue-list *ngFor="let name of listName" [reversed]="!reversed" [name]="name" [id]="name+'-B'" [content]="this.partBLabels[name]" (drop)="onDropSplited($event)" (issueSelected)="onIssueSelected($event)">
                 </app-issue-list>
             </div>
         </div>
