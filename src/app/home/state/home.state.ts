@@ -31,7 +31,7 @@ export class HomeState {
     this.splited.next(!this.splited.getValue());
     this.issues.next(
       this.issues.getValue().map((issue) => {
-        issue.splitPart = 'A';
+        if (!issue.splitPart) issue.splitPart = 'A';
         return issue;
       })
     );
