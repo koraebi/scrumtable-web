@@ -7,11 +7,12 @@
   <div
     class="d-flex justify-content-between card-header bg-transparent border-success header_p"
   >
-    <span>Issue : #{{ issue.number }}</span>
+    <span>
+      <strong>Issue : #{{ issue.number }} </strong></span>
   </div>
   <div class="card-body text-success">
     <p class="card-title">{{ issue.name }}</p>
-    <p class="card-title">{{ issue.description }}</p>
+    <p class="card-title" style="font-style: italic;color :#85929E;">{{ issue.description }}</p>
     <div *ngIf="issue.labels">
     <span
       class="badge rounded-pill bg-info text-dark"

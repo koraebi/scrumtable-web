@@ -25,6 +25,8 @@ span {
 .number_container {
   display: inline-block;
   margin-left: 5px;
+  touch-action: auto;
+
 }
 
 .img_container {

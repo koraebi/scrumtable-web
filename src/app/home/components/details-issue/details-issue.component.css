@@ -21,6 +21,10 @@
   margin-bottom: 15px;
 }
 
+.card-title {
+  color: black;
+}
+
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;

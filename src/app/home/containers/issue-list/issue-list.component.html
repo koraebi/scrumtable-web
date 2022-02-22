@@ -1,15 +1,18 @@
-<div style="height: 20%;" *ngIf="this.content">
+<div style="height: 20%;" *ngIf="this.content" >
     <!-- this one shows line up the issues that are labelled -->
   <hr *ngIf="name!=='Available'" class="line">
     <!-- this one shows line up issues that aren't labelled -->
   <hr *ngIf="name==='Available'" class="full-line">
   <!-- this one shows issues already labelled -->
-  <div *ngIf="name!=='Available'" class="d-flex">
+  <div *ngIf="name!=='Available'" class="d-flex" style="overflow-y: auto" cdkScrollable >
     <div  class="p-2 name-div" [style.color]="this.content.color">
       <span class="name-span"><h1>{{this.name}}</h1></span></div>
+    <div class="p-2 flex-grow-1 list overflow-auto" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="vertical"  (cdkDropListDropped)="onDrop($event)">
+      <app-mini-issue   *ngFor="let issue of this.content.issues.slice(0,(this.content.issues.length)/2)" [issue]="issue" [color]="content.color"  (selected)="issueSelected.emit($event)"></app-mini-issue>
+  </div>
+    <!--div class="vl"></div-->
     <div class="p-2 flex-grow-1 list overflow-auto" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="vertical" (cdkDropListDropped)="onDrop($event)">
-      <!--app-mini-issue *ngFor="let issue of this.content.issues.slice( (this.content.issues.length)/2 ,(this.content.issues.length))" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></!--app-mini-issue-->
-      <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
+      <app-mini-issue *ngFor="let issue of this.content.issues.slice( (this.content.issues.length)/2 ,(this.content.issues.length))" [issue]="issue" [color]="content.color"   (selected)="issueSelected.emit($event)"></app-mini-issue>
     </div>
   </div>
   <!-- this one shows issues non labelled -->

@@ -4,11 +4,15 @@
   height: 100%;
   border-radius: 10px;
   overflow-x: auto;
+  background-color: #e0deec;
+
 }
 .basic-container {
   padding: 3px;
+
 }
 app-details-issue {
   margin: 7px;
+
 }
 
