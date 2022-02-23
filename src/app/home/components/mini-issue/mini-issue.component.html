@@ -1,4 +1,4 @@
-<div *ngIf="issue" class="issue" [style.border-color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)" appDraggable>
+<div *ngIf="issue" class="issue" [style.border-color]="color" [parent]="parent" [model]="getModel()" (dragStarted)="selected.emit(issue)" appDraggable>
   <div class="number_container">
    <span [style.color]="color"><b>#{{issue.number}}</b></span>
   </div>

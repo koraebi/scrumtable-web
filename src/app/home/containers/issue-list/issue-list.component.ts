@@ -22,7 +22,7 @@ export class IssueListComponent implements OnInit {
   reversed: boolean = false;
 
   @Output()
-  drop = new EventEmitter<{ from: string; to: string; index: number }>();
+  drop = new EventEmitter<{ from: string; to: string; number: number }>();
 
   @Output()
   issueSelected = new EventEmitter<Issue>();
@@ -35,7 +35,22 @@ export class IssueListComponent implements OnInit {
     this.drop.emit({
       from: event.previousContainer.id,
       to: event.container.id,
-      index: event.previousIndex,
+      number: event.previousIndex,
     });
+  }
+
+  onMultiDrop(event: any) {
+    console.log(event)
+    this.drop.emit(
+      {
+        from: event.from,
+        to: event.to,
+        number: event.number,
+      }
+    )
+  }
+
+  signal($event: any) {
+    //console.log(event)
   }
 }

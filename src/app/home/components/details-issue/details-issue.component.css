@@ -1,3 +1,9 @@
+.issue{
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+  transform: translate(0px, 0px);
+}
 .mat_icon2 {
   color: #85929E;
   font-size: 20px;
@@ -34,10 +40,6 @@
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.issue:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 

@@ -10,10 +10,16 @@ export class DraggableDirective implements OnInit{
   model: any;
 
   @Input()
+  parent: any;
+
+  @Input()
   options: any;
 
   @Output()
   draggableClick = new EventEmitter();
+
+  @Output()
+  dragStarted = new EventEmitter();
 
   private currentlyDragged = false;
 
@@ -29,6 +35,10 @@ export class DraggableDirective implements OnInit{
   ngOnInit(): void {
     interact(this.element.nativeElement)
       .draggable(Object.assign({}, this.options || {}))
+      .on('dragstart', (event) => {
+        //console.log(event);
+        this.dragStarted.emit(this.parent);
+      })
       .on('dragmove', (event) => {
         const target = event.target;
         const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;

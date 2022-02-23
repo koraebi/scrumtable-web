@@ -122,89 +122,115 @@ export class HomeComponent implements OnInit {
     this.homeFacade.sendMessage('lockTabletIssue', issue.number.toString());
   }
 
-  onDrop(event: { from: string; to: string; index: number }): void {
-    const issue =
-      event.from === 'Details'
-        ? this.detailsList[event.index]
-        : this.labels[event.from].issues[event.index];
-
-    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
-
-    if (event.from === event.to) return;
-
-    if (event.from === 'Details') this.homeFacade.closeIssueDetails(issue);
-    else if (event.from === 'Available')
-      this.homeFacade.addMoscowLabel(issue, event.to as Moscow);
-    else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(issue);
-    else this.homeFacade.changeMoscowLabel(issue, event.to as Moscow);
-  }
-
-  onDropSplited(event: { from: string; to: string; index: number }) {
-    const splitFrom: 'A' | 'B' = event.from.split('-')[1] as 'A' | 'B';
-    const splitTo: 'A' | 'B' = event.to.split('-')[1] as 'A' | 'B';
-
-    const from = event.from.split('-')[0];
-    const to = event.to.split('-')[0];
-
-    let issue;
-
-    if (from === 'Details')
-      issue =
-        splitFrom === 'A'
-          ? this.partADetailsList[event.index]
-          : this.partBDetailsList[event.index];
-    else
-      issue =
-        splitFrom === 'A'
-          ? this.partALabels[from].issues[event.index]
-          : this.partBLabels[from].issues[event.index];
-
-    if (from != to) {
-      if (from === 'Details') this.homeFacade.closeIssueDetails(issue);
-      else if (from === 'Available')
-        this.homeFacade.addMoscowLabel(issue, to as Moscow);
-      else if (to === 'Available') this.homeFacade.removeMoscowLabel(issue);
-      else this.homeFacade.changeMoscowLabel(issue, to as Moscow);
+  getIssueIndex(from: string, number: number){
+    let index;
+    if(from !== 'Details')
+    for (let i = 0; i < this.labels[from].issues.length; i++){
+      if (this.labels[from].issues[i].number === number)
+        index = i;
     }
-
-    this.homeFacade.updateSplitPart(issue, splitTo);
+    else
+      for (let i = 0; i < this.detailsList.length; i++){
+        if (this.detailsList[i].number === number)
+          index = i;
+      }
+    return index;
   }
 
-  onDetailsDrop(event: { from: string; to: string; index: number }) {
-    if (event.from === event.to) return;
-    const issue = this.labels[event.from].issues[event.index];
-    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
-    if (event.from != event.to) this.homeFacade.openIssueDetails(issue);
+  onDrop(event: { from: string; to: string; number: number }): void {
+    const index =  this.getIssueIndex(event.from,event.number);
+    if(index !== undefined) {
+      const issue =
+        event.from === 'Details'
+          ? this.detailsList[index]
+          : this.labels[event.from].issues[index];
+
+      this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
+
+      if (event.from === event.to) return;
+      if (event.from === 'Details') this.homeFacade.closeIssueDetails(issue);
+      else if (event.from === 'Available')
+        this.homeFacade.addMoscowLabel(issue, event.to as Moscow);
+      else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(issue);
+      else this.homeFacade.changeMoscowLabel(issue, event.to as Moscow);
+    }
+  }
+
+  onDropSplited(event: { from: string; to: string; number: number }) {
+    const index =  this.getIssueIndex(event.from,event.number);
+    if(index !== undefined) {
+      const splitFrom: 'A' | 'B' = event.from.split('-')[1] as 'A' | 'B';
+      const splitTo: 'A' | 'B' = event.to.split('-')[1] as 'A' | 'B';
+
+      const from = event.from.split('-')[0];
+      const to = event.to.split('-')[0];
+
+      let issue;
+
+      if (from === 'Details')
+        issue =
+          splitFrom === 'A'
+            ? this.partADetailsList[index]
+            : this.partBDetailsList[index];
+      else
+        issue =
+          splitFrom === 'A'
+            ? this.partALabels[from].issues[index]
+            : this.partBLabels[from].issues[index];
+
+      if (from != to) {
+        if (from === 'Details') this.homeFacade.closeIssueDetails(issue);
+        else if (from === 'Available')
+          this.homeFacade.addMoscowLabel(issue, to as Moscow);
+        else if (to === 'Available') this.homeFacade.removeMoscowLabel(issue);
+        else this.homeFacade.changeMoscowLabel(issue, to as Moscow);
+      }
+
+      this.homeFacade.updateSplitPart(issue, splitTo);
+    }
+  }
+
+  onDetailsDrop(event: { from: string; to: string; number: number }) {
+    const index =  this.getIssueIndex(event.from,event.number);
+    if(index !== undefined) {
+      if (event.from === event.to) return;
+      const issue = this.labels[event.from].issues[index];
+      this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
+      if (event.from != event.to) this.homeFacade.openIssueDetails(issue);
+    }
   }
 
   onDetailsDropSplited(event: {
     from: string;
     to: string;
-    index: number;
+    number: number;
   }): void {
-    const splitFrom: 'A' | 'B' = event.from.split('-')[1] as 'A' | 'B';
-    const splitTo: 'A' | 'B' = event.to.split('-')[1] as 'A' | 'B';
+    const index =  this.getIssueIndex(event.from,event.number);
+    if(index !== undefined) {
+      const splitFrom: 'A' | 'B' = event.from.split('-')[1] as 'A' | 'B';
+      const splitTo: 'A' | 'B' = event.to.split('-')[1] as 'A' | 'B';
 
-    const from = event.from.split('-')[0];
-    const to = event.to.split('-')[0];
+      const from = event.from.split('-')[0];
+      const to = event.to.split('-')[0];
 
-    let issue;
+      let issue;
 
-    if (from === 'Details')
-      issue =
-        splitFrom === 'A'
-          ? this.partADetailsList[event.index]
-          : this.partBDetailsList[event.index];
-    else
-      issue =
-        splitFrom === 'A'
-          ? this.partALabels[from].issues[event.index]
-          : this.partBLabels[from].issues[event.index];
+      if (from === 'Details')
+        issue =
+          splitFrom === 'A'
+            ? this.partADetailsList[index]
+            : this.partBDetailsList[index];
+      else
+        issue =
+          splitFrom === 'A'
+            ? this.partALabels[from].issues[index]
+            : this.partBLabels[from].issues[index];
 
-    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
+      this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
 
-    if (from != to) this.homeFacade.openIssueDetailsSplited(issue, splitTo);
-    else this.homeFacade.updateSplitPart(issue, splitTo);
+      if (from != to) this.homeFacade.openIssueDetailsSplited(issue, splitTo);
+      else this.homeFacade.updateSplitPart(issue, splitTo);
+    }
   }
 
   arrayRemove(arr: Issue[], value: Issue) {

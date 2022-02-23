@@ -1,4 +1,4 @@
-<div class="card-group details" cdkDropList [id]="id" [cdkDropListData]="detailsList" cdkDropListOrientation="horizontal" (cdkDropListDropped)="onDrop($event)" [ngClass]="reversed ? 'reverse' : ''">
-    <app-details-issue *ngFor="let issue of detailsList" [issue]="issue">
-    </app-details-issue>
+<div class="card-group details" appDroppable [options]="{ accept: '.issue' }" [id]="id" (dropping)="onMultiDrop($event)" [ngClass]="reversed ? 'reverse' : ''">
+  <app-details-issue *ngFor="let issue of detailsList" [parent]="id" [issue]="issue">
+  </app-details-issue>
 </div>

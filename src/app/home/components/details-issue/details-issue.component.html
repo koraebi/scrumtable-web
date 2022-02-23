@@ -1,4 +1,4 @@
-<div *ngIf="issue" class="card border-success mb-3 detail_container" cdkDrag (cdkDragStarted)="selected.emit(issue)">
+<div *ngIf="issue" class="issue card border-success mb-3 detail_container" [parent]="parent" [model]="getModel()" (dragStarted)="selected.emit(issue)" appDraggable>
   <div class="d-flex justify-content-between card-header bg-transparent border-success header_p">
     <span>Issue : #{{issue.number}}</span>
     <img class="assignee_avatar" *ngIf="!issue.assignee" src="assets/images/icon_no_matcher.png">
