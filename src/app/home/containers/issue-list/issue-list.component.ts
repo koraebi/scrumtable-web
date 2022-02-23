@@ -22,7 +22,7 @@ export class IssueListComponent implements OnInit {
   reversed: boolean = false;
 
   @Output()
-  drop = new EventEmitter<{ from: string; to: string; number: number }>();
+  drop = new EventEmitter<{ from: string; to: string; issue: Issue}>();
 
   @Output()
   issueSelected = new EventEmitter<Issue>();
@@ -31,13 +31,6 @@ export class IssueListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onDrop(event: CdkDragDrop<Issue[]>) {
-    this.drop.emit({
-      from: event.previousContainer.id,
-      to: event.container.id,
-      number: event.previousIndex,
-    });
-  }
 
   onMultiDrop(event: any) {
     console.log(event)
@@ -45,7 +38,7 @@ export class IssueListComponent implements OnInit {
       {
         from: event.from,
         to: event.to,
-        number: event.number,
+        issue: event.issue,
       }
     )
   }

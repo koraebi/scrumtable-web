@@ -24,7 +24,7 @@ export class DetailsComponent implements OnInit {
   reversed: boolean = false;
 
   @Output()
-  drop = new EventEmitter<{ from: string; to: string; number: number }>();
+  drop = new EventEmitter<{ from: string; to: string; issue: Issue }>();
 
   constructor() {}
 
@@ -32,22 +32,13 @@ export class DetailsComponent implements OnInit {
 
   ngOnChanges(): void {}
 
-  onDrop(event: CdkDragDrop<Issue[]>) {
-    console.log(event);
-    this.drop.emit({
-      from: event.previousContainer.id,
-      to: event.container.id,
-      number: event.previousIndex,
-    });
-  }
-
   onMultiDrop(event: any) {
     console.log(event);
     this.drop.emit(
       {
         from: event.from,
         to: event.to,
-        number: event.number,
+        issue: event.issue,
       }
     )
   }

@@ -39,7 +39,7 @@ export class DroppableDirective {
           let res = {
             from: model.from,
             to: this.id,
-            number: model.issue.number
+            issue: model.issue
           }
           this.dropping.emit(res);
         }
