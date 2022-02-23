@@ -20,6 +20,7 @@ import { TitleToolbarComponent } from './components/title-toolbar/title-toolbar.
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DraggableDirective } from './directives/drag/draggable.directive';
 import { DroppableDirective } from './directives/drop/droppable.directive';
+import { WindowComponent } from './components/window/window.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { DroppableDirective } from './directives/drop/droppable.directive';
     TitleToolbarComponent,
     DraggableDirective,
     DroppableDirective,
+    WindowComponent,
   ],
   providers: [HomeFacade, MoscowDataFacade, HomeState],
 })
