@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TitleToolbarComponent } from './components/title-toolbar/title-toolbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { DraggableDirective } from './directives/drag/draggable.directive';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MiniIssueComponent,
     DetailsIssueComponent,
     TitleToolbarComponent,
+    DraggableDirective,
   ],
   providers: [HomeFacade, MoscowDataFacade, HomeState],
 })
