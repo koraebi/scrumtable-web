@@ -21,6 +21,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { DraggableDirective } from './directives/drag/draggable.directive';
 import { DroppableDirective } from './directives/drop/droppable.directive';
 import { WindowComponent } from './components/window/window.component';
+import {ButtonModule} from "smart-webcomponents-angular/button";
+import {WindowModule} from "smart-webcomponents-angular/window";
 
 @NgModule({
   imports: [
@@ -32,6 +34,8 @@ import { WindowComponent } from './components/window/window.component';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
+    ButtonModule,
+    WindowModule,
   ],
   declarations: [
     HomeComponent,

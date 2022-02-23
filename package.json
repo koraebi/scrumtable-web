@@ -28,7 +28,9 @@
     "ngx-pagination": "^5.1.1",
     "ngx-socket-io": "^4.1.0",
     "rxjs": "~7.4.0",
+    "smart-webcomponents": "^12.0.0",
     "smart-webcomponents-angular": "^13.0.1",
+    "smart-webcomponents-community": "^12.0.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

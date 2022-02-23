@@ -1,12 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { Issue } from 'src/app/home/model/issue.model';
 import { HomeFacade } from '../../facades/home.facade';
 import { ILabel } from '../../model/label.model';
 import { globalLabels, labelsPartA, labelsPartB } from '../../data/labels';
 import { Moscow } from '../../enum/moscow.enum';
 import { MoscowDataFacade } from '../../facades/moscow-data.facade';
-import {ButtonComponent} from "smart-webcomponents-angular/button";
-import {WindowComponent} from "smart-webcomponents-angular/window";
 
 @Component({
   selector: 'app-home',
@@ -14,8 +12,7 @@ import {WindowComponent} from "smart-webcomponents-angular/window";
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent | undefined;
-  @ViewChild('window', { read: WindowComponent, static: false }) smartWindow: WindowComponent | undefined;
+
   labels: ILabel = globalLabels;
   detailsList: Issue[] = [];
   message: string = '';
@@ -38,11 +35,6 @@ export class HomeComponent implements OnInit {
     private moscowDataFacade: MoscowDataFacade
   ) {}
 
-  onButtonClick(event:any): void {
-    const smartWindow = this.smartWindow;
-
-    smartWindow?.opened ? smartWindow.close() : smartWindow?.open();
-  }
 
   ngOnInit() {
     this.moscowDataFacade.loadIssues();

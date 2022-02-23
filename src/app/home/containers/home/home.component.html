@@ -1,14 +1,6 @@
-<h1>Fun with Portals</h1>
-<p>Click this button to open a portal:</p>
-<button (click)="this.showPortal = true">open me!</button>
 
-<!-- Whatever you wrap with the '<window>' component will be rendered on a new window  -->
-<app-window *ngIf="showPortal">
-  <h2>Hello world from amother window!!</h2>
-  <button (click)="this.showPortal = false">Close me!</button>
-</app-window>
 <div class="h-100 global_container">
-    <div class="moscow_container">
+    <div class="myoscow_container">
         <app-title-toolbar title="MoSCoW BY SCRUMTABLE" (reverse)="onReverse()" (splitScreen)="onSplitScreen()" [reversed]="reversed">
         </app-title-toolbar>
         <div *ngIf="!splited" class="moscow_fields_container">
