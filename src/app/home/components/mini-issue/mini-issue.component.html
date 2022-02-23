@@ -1,4 +1,4 @@
-<div *ngIf="issue" class="issue" [style.border-color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)">
+<div *ngIf="issue" class="issue" [style.border-color]="color" cdkDrag (cdkDragStarted)="selected.emit(issue)" appDraggable>
   <div class="card"  *cdkDragPreview style="width: 25%;height : 25%;">
     <div class="card-body">
     <strong class="issue_container">

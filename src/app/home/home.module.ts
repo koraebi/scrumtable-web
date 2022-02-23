@@ -14,7 +14,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MaterialModule} from "../shared/modules/material/material.module";
 import { MiniIssueComponent } from './components/mini-issue/mini-issue.component';
 import { DetailsIssueComponent } from './components/details-issue/details-issue.component';
-
+import { DraggableDirective } from "./utils/draggableDirective";
+import { DroppableDirective } from "./utils/droppableDirective";
 @NgModule({
   imports: [HomeRoutingModule, SharedModule, DragDropModule, NgxPaginationModule, MatGridListModule, MaterialModule],
     declarations: [
@@ -23,7 +24,9 @@ import { DetailsIssueComponent } from './components/details-issue/details-issue.
         IssueListComponent,
         DetailsComponent,
         MiniIssueComponent,
-        DetailsIssueComponent
+        DetailsIssueComponent,
+        DraggableDirective,
+        DroppableDirective,
     ],
     providers: [HomeFacade, HomeState]
 })
