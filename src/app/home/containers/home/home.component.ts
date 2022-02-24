@@ -62,11 +62,10 @@ export class HomeComponent implements OnInit {
     if (event.from === event.to) return;
 
     if (event.from === 'Details') this.homeFacade.closeIssueDetails(issue);
-    else if (event.from === 'Available')
+    if (event.from === 'Available')
       this.homeFacade.addMoscowLabel(issue, event.to as Moscow);
     else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(issue);
     else this.homeFacade.changeMoscowLabel(issue, event.to as Moscow);
-
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
