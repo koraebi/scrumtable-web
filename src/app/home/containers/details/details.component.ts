@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Issue} from "../../model/issue.model";
-import {CdkDragDrop} from "@angular/cdk/drag-drop";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Issue } from '../../model/issue.model';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 export interface Tile {
   color: string;
   cols: number;
@@ -11,31 +11,39 @@ export interface Tile {
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent implements OnInit {
   @Input()
   detailsList: Issue[] = [];
 
+  @Input()
+  id: string = 'Details';
+
+  @Input()
+  reversed: boolean = false;
 
   @Output()
-  drop = new EventEmitter<{from: string, to: string, index: number}>();
-  constructor() { }
+  drop = new EventEmitter<{ from: string; to: string; issue: Issue }>();
 
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges(): void {}
+
+  onMultiDrop(event: any) {
+    console.log(event);
+    this.drop.emit(
+      {
+        from: event.from,
+        to: event.to,
+        issue: event.issue,
+      }
+    )
   }
 
-  ngOnChanges(): void{
-  }
-
-
-
-  onDrop(event: CdkDragDrop<Issue[]>) {
-    this.drop.emit({
-      from: event.previousContainer.id,
-      to: event.container.id,
-      index: event.previousIndex
-    });
+  signal(event: any) {
+    console.log(event);
   }
 }

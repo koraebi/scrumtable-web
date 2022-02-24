@@ -1,32 +1,55 @@
-
 .name {
-  width: 10%;
+    width: 10%;
 }
 
 .cont {
-  height: 90px;
-}
-
-
-.global_container {
-
+    height: 90px;
 }
 
 .moscow_container {
-  height: 70%;
-  max-height: 70%;
+    height: 70%;
+    max-height: 70%;
 }
+
 .details_container {
-  height: 29%;
-  max-height: 29%;
+    height: 29%;
+    max-height: 29%;
+}
+
+.details-container-splited {
+    height: 29%;
+    max-height: 29%;
+    display: flex;
 }
 
 .title_container {
-  height: 7%;
+    display: flex;
+    height: 7%;
+    justify-content: space-between;
 }
+
 h2 {
-  color: #909497;
+    color: #909497;
 }
+
 .moscow_fields_container {
-  height: 93%;
+    height: 93%;
+}
+
+.splited-container {
+    display: flex;
+    height: 93%;
+    width: 100%;
+}
+
+.part-A {
+    width: 50%;
+}
+
+.part-B {
+    width: 50%;
+}
+
+.reverse {
+    flex-direction: row-reverse;
 }

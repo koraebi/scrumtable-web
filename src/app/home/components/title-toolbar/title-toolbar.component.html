@@ -1,0 +1,11 @@
+<mat-toolbar [ngClass]="reversed ? 'reverse' : ''">
+    <button mat-icon-button (click)="reverse.emit()">
+        <mat-icon>swap_horiz</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <span>{{ title }}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="splitScreen.emit()">
+        <mat-icon>vertical_split</mat-icon>
+    </button>
+</mat-toolbar>

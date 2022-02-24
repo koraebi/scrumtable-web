@@ -1,14 +1,18 @@
 .details {
-  margin-top: 5px;
-  border: solid 3px #BDC3C7;
-  height: 100%;
-  border-radius: 10px;
-  overflow-x: auto;
-}
-.basic-container {
-  padding: 3px;
-}
-app-details-issue {
-  margin: 7px;
+    margin-top: 5px;
+    border: solid 3px #bdc3c7;
+    height: 100%;
+    border-radius: 10px;
 }
 
+.basic-container {
+    padding: 3px;
+}
+
+app-details-issue {
+    margin: 7px;
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}

@@ -1,15 +1,33 @@
-<div cdkDropListGroup class="h-100 global_container">
-  <div class="moscow_container">
-    <div class="title_container">
-      <h2 style="text-align: center; max-height: 100%">MoSCoW BY SCRUMTABLE</h2>
+<div class="h-100 global_container">
+    <div class="moscow_container">
+        <app-title-toolbar title="MoSCoW BY SCRUMTABLE" (reverse)="onReverse()" (splitScreen)="onSplitScreen()" [reversed]="reversed">
+        </app-title-toolbar>
+        <div *ngIf="!splited" class="moscow_fields_container">
+            <app-issue-list *ngFor="let name of listName" [reversed]="reversed" [name]="name" [id]="name" [content]="this.labels[name]" (drop)="onDrop($event)" (issueSelected)="onIssueSelected($event)">
+            </app-issue-list>
+        </div>
+        <div *ngIf="splited" class="splited-container" [ngClass]="reversed ? 'reverse' : ''">
+            <div class="part-A">
+                <app-issue-list *ngFor="let name of listName" [reversed]="reversed" [name]="name" [id]="name+'-A'" [content]="this.partALabels[name]" (drop)="onDropSplited($event)" (issueSelected)="onIssueSelected($event)">
+                </app-issue-list>
+            </div>
+            <div class="part-B">
+                <app-issue-list *ngFor="let name of listName" [reversed]="!reversed" [name]="name" [id]="name+'-B'" [content]="this.partBLabels[name]" (drop)="onDropSplited($event)" (issueSelected)="onIssueSelected($event)">
+                </app-issue-list>
+            </div>
+        </div>
     </div>
-    <div class="moscow_fields_container">
-      <app-issue-list *ngFor="let name of listName" [name]="name" [content]="this.labels[name]" (drop)="onDrop($event)" (issueSelected)="onIssueSelected($event)"></app-issue-list>
-  </div>
-  </div>
-  <div class="details_container">
-    <app-details [detailsList]="detailsList" (drop)="onDetailsDrop($event)"></app-details>
-  </div>
+    <div *ngIf="!splited" class="details_container">
+        <app-details [detailsList]="detailsList" [reversed]="reversed" (drop)="onDetailsDrop($event)"></app-details>
+    </div>
+    <div *ngIf="splited" class="details-container-splited" [ngClass]="reversed ? 'reverse' : ''">
+        <div class="part-A">
+            <app-details [detailsList]="partADetailsList" [id]="'Details-A'" [reversed]="reversed" (drop)="onDetailsDropSplited($event)">
+            </app-details>
+        </div>
+        <div class="part-B">
+            <app-details [detailsList]="partBDetailsList" [id]="'Details-B'" [reversed]="!reversed" (drop)="onDetailsDropSplited($event)">
+            </app-details>
+        </div>
+    </div>
 </div>
-
-

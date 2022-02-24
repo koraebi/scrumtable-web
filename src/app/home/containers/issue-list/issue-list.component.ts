@@ -1,38 +1,49 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Issue } from 'src/app/home/model/issue.model';
-import {IContent} from "../../model/label.model";
+import { IContent } from '../../model/label.model';
 
 @Component({
   selector: 'app-issue-list',
   templateUrl: './issue-list.component.html',
-  styleUrls: ['./issue-list.component.css']
+  styleUrls: ['./issue-list.component.css'],
 })
 export class IssueListComponent implements OnInit {
   @Input()
-  name: string = "";
-  p: number = 1;
+  name: string = '';
+
+  @Input()
+  id: string = '';
 
   @Input()
   content?: IContent;
 
+  @Input()
+  reversed: boolean = false;
+
   @Output()
-  drop = new EventEmitter<{from: string, to: string, index: number}>();
+  drop = new EventEmitter<{ from: string; to: string; issue: Issue}>();
 
   @Output()
   issueSelected = new EventEmitter<Issue>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+
+  onMultiDrop(event: any) {
+    console.log(event)
+    this.drop.emit(
+      {
+        from: event.from,
+        to: event.to,
+        issue: event.issue,
+      }
+    )
   }
 
-  onDrop(event: CdkDragDrop<Issue[]>) {
-    this.drop.emit({
-      from: event.previousContainer.id,
-      to: event.container.id,
-      index: event.previousIndex
-    });
+  signal($event: any) {
+    //console.log(event)
   }
-
 }
