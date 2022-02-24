@@ -5,15 +5,17 @@
   border: 5px solid;
   border-radius: 15px;
   margin-bottom: 7px;
+  display: inline-flex;
+  align-items: baseline;
 }
 
 span {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .card {
   border-color:#6658d3;
-  border-radius: 5px;
+  border-radius: 4px;
   border: 3px solid;
 
 }
@@ -57,8 +59,8 @@ span {
 }
 
 .assignee_avatar {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 15px;
 }
 

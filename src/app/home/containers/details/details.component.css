@@ -5,7 +5,7 @@
   border-radius: 10px;
   overflow-x: auto;
   background-color: #e0deec;
-
+  justify-content: space-evenly;
 }
 .basic-container {
   padding: 3px;

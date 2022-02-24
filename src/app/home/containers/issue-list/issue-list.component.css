@@ -5,18 +5,20 @@
     flex-direction: row;
     background: white;
     border-radius: 4px;
-    flex-wrap: wrap;
     overflow-x: scroll;
-    overflow-y: scroll;
+    height:80%
+}
+.list::-webkit-scrollbar{
+  background-color:lightsteelblue;
+  height:1vh;
+}
+.list::-webkit-scrollbar-thumb{
+  background-color:#85929E;
+  height:0.5vh;
+  bottom:20%;
+  position:relative;
 }
 
-.vl {
-  border-left: 6px solid green;
-  height: 500px;
-  position: absolute;
-  left: 50%;
-  margin-left: -3px;
-}
 
 .p-2 name-div {
   overflow-x: auto;
@@ -52,18 +54,6 @@
 }
 
 
-.my-pagination /deep/ .ngx-pagination .current,
-.btn-info {
-  background: darkcyan !important;
-  border: transparent !important;
-  border-radius: 20px !important;
-}
-
-.my-pagination /deep/ .ngx-pagination .current:hover {
-  background: #85929E !important;
-  border-radius: 20px !important;
-  border: transparent !important;
-}
 
 .list.cdk-drop-list-dragging {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);

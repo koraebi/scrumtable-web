@@ -76,12 +76,11 @@ export class HomeComponent implements OnInit {
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
     const issue = this.labels[event.from].issues[event.index];
-    console.log(event.to === "right_details")
+    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
     if (event.to === "right_details")
       issue.side="right"
     else
       issue.side="left"
-    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
     if (event.from != event.to) this.homeFacade.openIssueDetails(issue);
   }
 
