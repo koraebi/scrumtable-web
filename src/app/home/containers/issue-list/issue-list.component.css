@@ -6,6 +6,8 @@
     background: white;
     border-radius: 4px;
     flex-wrap: wrap;
+    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 .vl {

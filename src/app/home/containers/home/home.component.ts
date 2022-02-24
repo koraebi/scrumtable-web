@@ -12,7 +12,8 @@ import { Moscow } from '../../enum/moscow.enum';
 })
 export class HomeComponent implements OnInit {
   labels: ILabel = labels;
-  detailsList: Issue[] = [];
+  detailsListLeft: Issue[] = [];
+  detailsListRight: Issue[] = [];
   message: string = '';
 
   get listName(): string[] {
@@ -38,8 +39,11 @@ export class HomeComponent implements OnInit {
       .getWontIssues$()
       .subscribe((issues) => (this.labels["Won't"].issues = issues));
     this.homeFacade
-      .getDetailsIssues$()
-      .subscribe((issues) => (this.detailsList = issues));
+      .getDetailsIssues$("left")
+      .subscribe((issues) => (this.detailsListLeft = issues));
+    this.homeFacade
+      .getDetailsIssues$("right")
+      .subscribe((issues) => (this.detailsListRight = issues));
     this.homeFacade.loadIssues();
   }
 
@@ -53,15 +57,17 @@ export class HomeComponent implements OnInit {
 
   onDrop(event: { from: string; to: string; index: number }): void {
     const issue =
-      event.from === 'Details'
-        ? this.detailsList[event.index]
-        : this.labels[event.from].issues[event.index];
+      event.from === 'left_details' 
+        ? this.detailsListLeft[event.index]
+        : (event.from === 'right_details' 
+          ? this.detailsListRight[event.index]
+          : this.labels[event.from].issues[event.index]);
 
     this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
 
     if (event.from === event.to) return;
 
-    if (event.from === 'Details') this.homeFacade.closeIssueDetails(issue);
+    if (event.from === 'left_details' || event.from === 'right_details') this.homeFacade.closeIssueDetails(issue);
     if (event.from === 'Available')
       this.homeFacade.addMoscowLabel(issue, event.to as Moscow);
     else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(issue);
@@ -70,6 +76,11 @@ export class HomeComponent implements OnInit {
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
     const issue = this.labels[event.from].issues[event.index];
+    console.log(event.to === "right_details")
+    if (event.to === "right_details")
+      issue.side="right"
+    else
+      issue.side="left"
     this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
     if (event.from != event.to) this.homeFacade.openIssueDetails(issue);
   }

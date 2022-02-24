@@ -16,6 +16,8 @@ export interface Tile {
 export class DetailsComponent implements OnInit {
   @Input()
   detailsList: Issue[] = [];
+  @Input()
+  id : string="Details";
 
   @Output()
   drop = new EventEmitter<{ from: string; to: string; index: number }>();

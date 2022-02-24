@@ -20,6 +20,7 @@ export class Issue {
   readonly labels: Labels[];
   selected: boolean = false;
   details: boolean = false;
+  side : string = "left";
   moscow?: Moscow;
 
   constructor(

@@ -17,8 +17,14 @@
     </div>
   </div>
   <div class="details_container">
-    <app-details
-      [detailsList]="detailsList"
+    <app-details class="details_box"
+      id="left_details"
+      [detailsList]="detailsListLeft"
+      (drop)="onDetailsDrop($event)"
+    ></app-details>
+    <app-details class="details_box"
+      id="right_details"
+      [detailsList]="detailsListRight"
       (drop)="onDetailsDrop($event)"
     ></app-details>
   </div>

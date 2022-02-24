@@ -17,8 +17,13 @@
   max-height: 50%;
 }
 .details_container {
+  display: inline-flex;
   height: 49%;
   max-height: 49%;
+  width:100%
+}
+.details_box{
+  width:50%;
 }
 
 .title_container {

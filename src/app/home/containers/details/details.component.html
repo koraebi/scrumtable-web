@@ -1,6 +1,6 @@
 <div appDroppable class="card-group details"
      cdkDropList
-     id="Details"
+     [id]="id"
      [cdkDropListData]="detailsList"
      cdkDropListOrientation="horizontal"
      (cdkDropListDropped)="onDrop($event)">

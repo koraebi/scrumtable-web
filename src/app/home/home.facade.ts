@@ -86,10 +86,10 @@ export class HomeFacade {
       );
   }
 
-  getDetailsIssues$(): Observable<Issue[]> {
+  getDetailsIssues$(side : String): Observable<Issue[]> {
     return this.homeState
       .getIssues$()
-      .pipe(map((issues) => issues.filter((issue) => issue.details)));
+      .pipe(map((issues) => issues.filter((issue) => issue.details && issue.side === side)));
   }
 
   openIssueDetails(issue: Issue): void {
