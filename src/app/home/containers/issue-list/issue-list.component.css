@@ -6,7 +6,7 @@
     background: white;
     border-radius: 4px;
     overflow-x: scroll;
-    height:80%
+    height:8vh;
 }
 .list::-webkit-scrollbar{
   background-color:lightsteelblue;
@@ -18,7 +18,10 @@
   bottom:20%;
   position:relative;
 }
-
+#Available{
+  position:relative;
+  z-index: 100;
+}
 
 .p-2 name-div {
   overflow-x: auto;
