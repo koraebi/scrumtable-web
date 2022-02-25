@@ -1,8 +1,10 @@
 .details {
     margin-top: 5px;
-    border: solid 3px #bdc3c7;
+    border: solid 3px #4734d3;
     height: 100%;
+    background: #F9F9F9;
     border-radius: 10px;
+    overflow: auto;
 }
 
 .basic-container {

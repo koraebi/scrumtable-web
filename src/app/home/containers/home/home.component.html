@@ -1,6 +1,6 @@
 <div class="h-100 global_container">
     <div class="moscow_container">
-        <app-title-toolbar title="MoSCoW BY SCRUMTABLE" (reverse)="onReverse()" (splitScreen)="onSplitScreen()" [reversed]="reversed">
+        <app-title-toolbar class="title_container" title="MoSCoW BY SCRUMTABLE" (reverse)="onReverse()" (splitScreen)="onSplitScreen()" [reversed]="reversed">
         </app-title-toolbar>
         <div *ngIf="!splited" class="moscow_fields_container">
             <app-issue-list *ngFor="let name of listName" [reversed]="reversed" [name]="name" [id]="name" [content]="this.labels[name]" (drop)="onDrop($event)" (issueSelected)="onIssueSelected($event)">
