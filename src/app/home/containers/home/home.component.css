@@ -25,6 +25,9 @@
 .details_box{
   width:50%;
 }
+#left_details{
+  direction:rtl;
+}
 
 .title_container {
   height: 7%;

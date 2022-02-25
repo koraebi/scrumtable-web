@@ -11,7 +11,7 @@
   display: inline-block;
 }
 .detail_container {
-  max-height: 100%;
+  max-height: 85%;
   max-width: 15rem;
   cursor: move
 }
@@ -58,3 +58,6 @@
   margin-left: 7px;
 }
 
+.card-body{
+  overflow-y: scroll;
+}
