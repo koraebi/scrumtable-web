@@ -11,7 +11,7 @@
   display: inline-block;
 }
 .detail_container {
-  max-height: 85%;
+  max-height: 100%;
   max-width: 15rem;
   cursor: move
 }
