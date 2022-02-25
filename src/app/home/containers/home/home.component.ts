@@ -75,7 +75,12 @@ export class HomeComponent implements OnInit {
   }
 
   onDetailsDrop(event: { from: string; to: string; index: number }) {
-    const issue = this.labels[event.from].issues[event.index];
+    const issue =
+      event.from === 'left_details' 
+        ? this.detailsListLeft[event.index]
+        : (event.from === 'right_details' 
+          ? this.detailsListRight[event.index]
+          : this.labels[event.from].issues[event.index]);
     this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
     if (event.to === "right_details")
       issue.side="right"
