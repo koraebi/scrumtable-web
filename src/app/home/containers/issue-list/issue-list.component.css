@@ -2,10 +2,31 @@
     width: 100%;
     max-width: 100%;
     display: flex;
-    flex-direction: row;
     background: white;
     border-radius: 4px;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.list::-webkit-scrollbar {
+  width: 5px;
+  height: 16px;
+  background-color: #FFFFFF;
+}
+
+
+.list::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(104, 140, 240, 0.3);
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: #4734d3;
+  outline: 1px solid slategrey;
+}
+
+.mini {
+  display: inline-block;
+  float: none;
 }
 
 .name-div {

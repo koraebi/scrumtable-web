@@ -43,6 +43,7 @@ export class DraggableDirective implements OnInit{
         const target = event.target;
         const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
         const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        target.style.position = 'absolute';
 
         target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
         target.setAttribute('data-x', x);
@@ -56,6 +57,7 @@ export class DraggableDirective implements OnInit{
         event.target.style.transform = 'none';
         event.target.removeAttribute('data-x');
         event.target.removeAttribute('data-y');
+        event.target.style.position = '';
         event.target.classList.remove('getting-dragged');
         setTimeout(() => {
           (window as any).dragData = null;
