@@ -33,7 +33,6 @@ export class IssueListComponent implements OnInit {
 
 
   onMultiDrop(event: any) {
-    console.log(event)
     this.drop.emit(
       {
         from: event.from,
