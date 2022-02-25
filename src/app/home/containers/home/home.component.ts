@@ -5,6 +5,11 @@ import { ILabel } from '../../model/label.model';
 import { globalLabels, labelsPartA, labelsPartB } from '../../data/labels';
 import { Moscow } from '../../enum/moscow.enum';
 import { MoscowDataFacade } from '../../facades/moscow-data.facade';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +17,12 @@ import { MoscowDataFacade } from '../../facades/moscow-data.facade';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   labels: ILabel = globalLabels;
   detailsList: Issue[] = [];
-  message: string = '';
+  actualLabel: number | undefined;
+  message: any = '';
 
   reversed = false;
   splited = false;
@@ -30,10 +38,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private homeFacade: HomeFacade,
-    private moscowDataFacade: MoscowDataFacade
+    private moscowDataFacade: MoscowDataFacade,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
+    this.homeFacade.getActionEmited$().subscribe(action => this.processAction(action));
     this.moscowDataFacade.loadIssues();
 
     this.homeFacade
@@ -112,6 +122,52 @@ export class HomeComponent implements OnInit {
     this.moscowDataFacade
       .getDetailsIssuesPartB$()
       .subscribe((issues) => (this.partBDetailsList = issues));
+  }
+
+  private _issueAlreadyPresent(number: number, new_label: string): boolean {
+    let v = false;
+    this.labels[new_label].issues.forEach(element => {
+      if (element.number === number) v = true;
+    })
+    this.partALabels[new_label].issues.forEach(element => {
+      if (element.number === number) v = true;
+    })
+    this.partBLabels[new_label].issues.forEach(element => {
+      if (element.number === number) v = true;
+    })
+    return v;
+  }
+
+  processAction(action: any) {
+    let message = ''
+    if(action.label === 'labeled'){
+      message = action.user + 'a évalué l\'issue # ' + action.issue_number + ' à ' + action.new_label;
+      if(!this._issueAlreadyPresent(action.issue_number, action.new_label)){
+        this.homeFacade.updateIssue(action.issue_number);
+        this.openSnackBar(message)
+      }
+    }
+    else if(action.label === 'unlabeled') {
+      if(action.new_label === 'Available'){
+        message = action.user + 'a délabélisé l\'issue #' + action.issue_number;
+        if(!this._issueAlreadyPresent(action.issue_number, 'Available')) {
+          this.homeFacade.updateIssue(action.issue_number);
+          this.openSnackBar(message)
+        }
+      }
+    }
+    else if(action.label === 'opened') {
+      message = action.user + 'a crée l\'issue #' + action.issue_number;
+      this.moscowDataFacade.loadIssues();
+      this.openSnackBar(message)
+    }
+  }
+  openSnackBar(m: string) {
+    this._snackBar.open(m, 'OK', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    })
   }
 
   sendMessage() {

@@ -16,6 +16,10 @@ export class HomeFacade {
 
   // Socket
 
+  getActionEmited$(): Observable<any>{
+    return this.socketService.getMessage();
+  }
+
   sendMessage(event: string, message: string): void {
     this.socketService.sendMessage(event, message);
   }
@@ -45,6 +49,7 @@ export class HomeFacade {
   }
 
   removeMoscowLabel(issue: Issue): void {
+    console.log('OOOOOOOHHH')
     // remove the current moscow label
     this.issuesAPI.removeLabelToIssue(issue, issue.moscow as Moscow).subscribe(
       // then update state
@@ -56,10 +61,14 @@ export class HomeFacade {
 
   changeMoscowLabel(issue: Issue, moscow: Moscow): void {
     this.issuesAPI
-          .addLabelToIssue(issue, moscow)
+      .removeLabelToIssue(issue, issue.moscow as Moscow)
+      .subscribe((resultIssue) =>
+        this.issuesAPI
+          .addLabelToIssue(resultIssue, moscow)
           .subscribe((finalIssue) => {
             this.socketService.sendMessage('updateTabletIssues', '');
           })
+      );
     issue.moscow = moscow;
     this.homeState.updateIssue(issue);
   }
@@ -83,6 +92,10 @@ export class HomeFacade {
   updateSplitPart(issue: Issue, splitPart: 'A' | 'B'): void {
     issue.splitPart = splitPart;
     this.homeState.updateIssue(issue);
+  }
+
+  updateIssue(number: number) {
+    this.homeState.updateIssue(this.homeState.getIssue(number));
   }
 
   openIssueDetailsSplited(issue: Issue, splitPart: 'A' | 'B'): void {

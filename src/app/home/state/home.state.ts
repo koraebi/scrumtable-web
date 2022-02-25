@@ -16,6 +16,12 @@ export class HomeState {
     this.issues.next(issues);
   }
 
+  getIssue(number: number): Issue {
+    const values = this.issues.getValue();
+    const index = values.findIndex((value) => value.number == number);
+    return values[index]
+  }
+
   updateIssue(issue: Issue): void {
     const values = this.issues.getValue();
     const index = values.findIndex((value) => value.name == issue.name);
