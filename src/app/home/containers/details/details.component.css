@@ -3,6 +3,7 @@
     border: solid 3px #4734d3;
     height: 100%;
     border-radius: 10px;
+    overflow: auto;
 }
 
 .basic-container {

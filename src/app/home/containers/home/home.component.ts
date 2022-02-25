@@ -159,7 +159,7 @@ export class HomeComponent implements OnInit {
       this.homeFacade.sendMessage('unlockTabletIssue', event.issue.number.toString());
       if (event.from === event.to) return;
       if (event.from === 'Details') this.homeFacade.closeIssueDetails(event.issue);
-      else if (event.from === 'Available')
+      if (event.from === 'Available')
         this.homeFacade.addMoscowLabel(event.issue, event.to as Moscow);
       else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(event.issue);
       else this.homeFacade.changeMoscowLabel(event.issue, event.to as Moscow);

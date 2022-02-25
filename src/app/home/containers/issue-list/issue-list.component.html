@@ -1,12 +1,12 @@
-<div style="height: 20%;" *ngIf="this.content">
-    <div *ngIf="name!=='Available'" class="d-flex" [ngClass]="reversed ? 'reverse' : ''">
+<div style="height: 20%" *ngIf="this.content">
+    <div *ngIf="name!=='Available'" class="h-100 d-flex" [ngClass]="reversed ? 'reverse' : ''">
         <div class="p-2 name-div" [style.color]="this.content.color" [ngClass]="reversed ? 'reverse' : ''"><span [ngClass]="reversed ? 'name-span-reverse' : 'name-span'">{{this.name}}</span></div>
-        <div class="p-2 flex-grow-1 list" [ngClass]="reversed ? 'reverse' : ''" [id]="id" appDroppable [options]="{ accept: '.issue' }" (dropping)="onMultiDrop($event)">
+        <div style="height: 100%;" class="p-2 flex-grow-1 list" [ngClass]="reversed ? 'reverse' : ''" [id]="id" appDroppable [options]="{ accept: '.issue' }" (dropping)="onMultiDrop($event)">
             <app-mini-issue class="mini" *ngFor="let issue of this.content.issues" [parent]="id" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
         </div>
     </div>
-    <div *ngIf="name==='Available'" class="d-flex" [ngClass]="reversed ? 'reverse' : ''">
-        <div class="p-2 flex-grow-1 list" [ngClass]="reversed ? 'reverse' : ''" [id]="id" appDroppable [options]="{ accept: '.issue' }" (dropping)="onMultiDrop($event)">
+    <div *ngIf="name==='Available'" class="h-100 d-flex" [ngClass]="reversed ? 'reverse' : ''">
+        <div style="height: 100%;" class="p-2 flex-grow-1 list" [ngClass]="reversed ? 'reverse' : ''" [id]="id" appDroppable [options]="{ accept: '.issue' }" (dropping)="onMultiDrop($event)">
             <app-mini-issue class="mini" *ngFor="let issue of this.content.issues" [parent]="id" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
         </div>
     </div>

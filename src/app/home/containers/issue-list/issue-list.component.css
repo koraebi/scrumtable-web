@@ -10,7 +10,7 @@
 
 .list::-webkit-scrollbar {
   width: 5px;
-  height: 16px;
+  height: 3px;
   background-color: #FFFFFF;
 }
 

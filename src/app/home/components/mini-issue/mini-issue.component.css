@@ -1,25 +1,30 @@
 .issue {
   cursor: move;
   margin-left: 10px;
-  max-height: 40px;
-  border: 5px solid;
-  border-radius: 15px;
+  height: 40px;
+  max-height: 70px;
+  border-bottom: 2px solid #F9F9F9;
+  border-top: 2px solid #F9F9F9;
+  border-right: 2px solid #F9F9F9;
+  border-left: 4px solid;
   margin-bottom: 7px;
   touch-action: none;
   user-select: none;
   transform: translate(0px, 0px);
 }
 
-span {
-  font-size: 20px;
+b {
+  font-size: 30px;
 }
 
 .number_container {
+  margin-top: 10px;
   display: inline-block;
   margin-left: 5px;
 }
 
 .img_container {
+  margin-top: 10px;
   display: inline-block;
   margin-left: 5px;
 }
