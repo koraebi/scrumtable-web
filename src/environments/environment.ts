@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_ENDPOINT: 'http://52.88.52.11:3000/issues',
-  SOCKET_ENDPOINT: 'http://52.88.52.11:3000'
+  API_ENDPOINT: 'http://54.212.138.51:3000/issues',
+  SOCKET_ENDPOINT: 'http://54.212.138.51:3000'
 
 };
 
