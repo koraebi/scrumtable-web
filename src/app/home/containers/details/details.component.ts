@@ -33,7 +33,6 @@ export class DetailsComponent implements OnInit {
   ngOnChanges(): void {}
 
   onMultiDrop(event: any) {
-    console.log(event);
     this.drop.emit(
       {
         from: event.from,

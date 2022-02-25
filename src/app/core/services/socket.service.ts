@@ -23,9 +23,10 @@ export class SocketService {
 
   public getMessage = () => {
     if (this.socket) {
-      this.socket.on('updateWebIssues', (message) => {
-        window.location.reload();
-        alert('update');
+      this.socket.on('updateIssue', (message) => {
+        //window.location.reload();
+        //alert('update');
+        console.log(message);
       });
     }
   };

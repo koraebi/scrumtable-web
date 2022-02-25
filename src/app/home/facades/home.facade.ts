@@ -56,14 +56,10 @@ export class HomeFacade {
 
   changeMoscowLabel(issue: Issue, moscow: Moscow): void {
     this.issuesAPI
-      .removeLabelToIssue(issue, issue.moscow as Moscow)
-      .subscribe((resultIssue) =>
-        this.issuesAPI
-          .addLabelToIssue(resultIssue, moscow)
+          .addLabelToIssue(issue, moscow)
           .subscribe((finalIssue) => {
             this.socketService.sendMessage('updateTabletIssues', '');
           })
-      );
     issue.moscow = moscow;
     this.homeState.updateIssue(issue);
   }
