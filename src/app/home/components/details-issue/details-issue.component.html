@@ -6,6 +6,7 @@
   </div>
   <div class="card-body text-success">
     <p class="card-title" >{{issue.name}}</p>
+    <p class="card-text overflow-auto" style="color: black; max-height: 150px;"> {{issue.description}}</p>
     <span><i>-- 1 Comment </i></span>
   </div>
   <div *ngIf="issue.assignees" class="card-footer">
