@@ -19,8 +19,9 @@ export class DetailsComponent implements OnInit {
   @Input()
   id : string="Details";
 
+
   @Output()
-  drop = new EventEmitter<{ from: string; to: string; index: number }>();
+  drop = new EventEmitter<{ from: string; to: string; issue: Issue }>();
 
   constructor() {}
 
@@ -28,11 +29,11 @@ export class DetailsComponent implements OnInit {
 
   ngOnChanges(): void {}
 
-  onDrop(event: CdkDragDrop<Issue[]>) {
+  onDrop(event: any) {
     this.drop.emit({
-      from: event.previousContainer.id,
-      to: event.container.id,
-      index: event.previousIndex,
+      from: event.from,
+      to: event.to,
+      issue: event.issue,
     });
   }
 }

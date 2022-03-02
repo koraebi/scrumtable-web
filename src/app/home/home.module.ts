@@ -16,8 +16,12 @@ import { MiniIssueComponent } from './components/mini-issue/mini-issue.component
 import { DetailsIssueComponent } from './components/details-issue/details-issue.component';
 import { DraggableDirective } from "./utils/draggableDirective";
 import { DroppableDirective } from "./utils/droppableDirective";
+import { PopoverModule, WavesModule } from 'angular-bootstrap-md';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
-  imports: [HomeRoutingModule, SharedModule, DragDropModule, NgxPaginationModule, MatGridListModule, MaterialModule],
+  imports: [HomeRoutingModule, SharedModule, DragDropModule, MatTooltipModule, NgxPaginationModule, MatGridListModule, MaterialModule, PopoverModule, NgbModule,WavesModule],
     declarations: [
         HomeComponent,
         IssueComponent,

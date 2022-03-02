@@ -4,19 +4,19 @@
     <!-- this one shows line up issues that aren't labelled -->
   <hr *ngIf="name==='Available'" class="full-line">
   <!-- this one shows issues already labelled -->
-  <div *ngIf="name!=='Available'" class="d-flex" style="overflow-y: auto" cdkScrollable >
+  <div *ngIf="name!=='Available'" class="d-flex"  >
     <div  class="p-2 name-div" [style.color]="this.content.color">
       <span class="name-span"><h1>{{this.name}}</h1></span></div>
-    <div appDroppable class="p-2 flex-grow-1 list overflow-auto" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="vertical"  (cdkDropListDropped)="onDrop($event)">
-      <app-mini-issue   *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color"  (selected)="issueSelected.emit($event)"></app-mini-issue>
+    <div  class="p-2 flex-grow-1 list"  [id]="id" appDroppable [options]="{ accept: '.issue'}"  (dropping)="onDrop($event)">
+      <app-mini-issue   *ngFor="let issue of this.content.issues" [from]="id" [issue]="issue" [color]="content.color"  (selected)="issueSelected.emit($event)"></app-mini-issue>
   </div>
   </div>
   <!-- this one shows issues non labelled -->
-  <div *ngIf="name==='Available'" class="d-flex" style="overflow-y: auto" cdkScrollable >
+  <div *ngIf="name==='Available'" class="d-flex" >
     <div  class="p-2 name-div" [style.color]="this.content.color">
-      <span class="name-span"><h1>Issues :</h1></span></div>
-    <div  appDroppable class="p-2 flex-grow-1 list overflow-auto" cdkDropList [id]="name" [cdkDropListData]="content.issues" cdkDropListOrientation="vertical" (cdkDropListDropped)="onDrop($event)">
-      <app-mini-issue *ngFor="let issue of this.content.issues" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
+      <span class="name-span"><h1>Issues </h1></span></div>
+    <div  appDroppable class="p-2 flex-grow-1 list"  [id]="id" appDroppable [options]="{ accept: '.issue'}" (dropping)="onDrop($event)">
+      <app-mini-issue *ngFor="let issue of this.content.issues" [from]="id" [issue]="issue" [color]="content.color" (selected)="issueSelected.emit($event)"></app-mini-issue>
     </div>
   </div>
 </div>

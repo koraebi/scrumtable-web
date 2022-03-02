@@ -55,38 +55,30 @@ export class HomeComponent implements OnInit {
     this.homeFacade.sendMessage('lockTabletIssue', issue.number.toString());
   }
 
-  onDrop(event: { from: string; to: string; index: number }): void {
-    const issue =
-      event.from === 'left_details' 
-        ? this.detailsListLeft[event.index]
-        : (event.from === 'right_details' 
-          ? this.detailsListRight[event.index]
-          : this.labels[event.from].issues[event.index]);
-
-    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
+  onDrop(event: { from: string; to: string; issue: Issue }): void {
+    console.log(event.to);
+    this.homeFacade.sendMessage('unlockTabletIssue', event.issue.number.toString());
 
     if (event.from === event.to) return;
 
-    if (event.from === 'left_details' || event.from === 'right_details') this.homeFacade.closeIssueDetails(issue);
+    if (event.from === 'left_details' || event.from === 'right_details') this.homeFacade.closeIssueDetails(event.issue);
     if (event.from === 'Available')
-      this.homeFacade.addMoscowLabel(issue, event.to as Moscow);
-    else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(issue);
-    else this.homeFacade.changeMoscowLabel(issue, event.to as Moscow);
+      this.homeFacade.addMoscowLabel(event.issue, event.to as Moscow);
+    else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(event.issue);
+    else this.homeFacade.changeMoscowLabel(event.issue, event.to as Moscow);
   }
 
-  onDetailsDrop(event: { from: string; to: string; index: number }) {
-    const issue =
-      event.from === 'left_details' 
-        ? this.detailsListLeft[event.index]
-        : (event.from === 'right_details' 
-          ? this.detailsListRight[event.index]
-          : this.labels[event.from].issues[event.index]);
-    this.homeFacade.sendMessage('unlockTabletIssue', issue.number.toString());
+  onDetailsDrop(event: { from: string; to: string; issue: Issue }) {
+    console.log(event.from);
+    console.log(event.issue);
+    console.log(event.to);
+
+    this.homeFacade.sendMessage('unlockTabletIssue', event.issue.number.toString());
     if (event.to === "right_details")
-      issue.side="right"
+      event.issue.side="right"
     else
-      issue.side="left"
-    if (event.from != event.to) this.homeFacade.openIssueDetails(issue);
+      event.issue.side="left"
+    if (event.from != event.to) this.homeFacade.openIssueDetails(event.issue);
   }
 
   arrayRemove(arr: Issue[], value: Issue) {

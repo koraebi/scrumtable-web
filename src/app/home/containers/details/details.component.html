@@ -1,9 +1,7 @@
-<div appDroppable class="card-group details"
-     cdkDropList
+<div  appDroppable class="card-group details"
+     [options]="{accept:'.issue'}"
      [id]="id"
-     [cdkDropListData]="detailsList"
-     cdkDropListOrientation="horizontal"
-     (cdkDropListDropped)="onDrop($event)">
-    <app-details-issue *ngFor="let issue of detailsList" [issue]="issue"></app-details-issue>
+     (dropping)="onDrop($event)">
+    <app-details-issue *ngFor="let issue of detailsList" [from]="id" [issue]="issue"></app-details-issue>
 </div>
 

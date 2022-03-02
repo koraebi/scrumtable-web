@@ -1,4 +1,4 @@
-<div cdkDropListGroup class="h-100 global_container">
+<div class="h-100 global_container">
   <div class="moscow_container">
     <div class="title_container">
       <h2 style="text-align: center; max-height: 100%; color: #4734d3">
@@ -9,6 +9,7 @@
     <div class="moscow_fields_container">
       <app-issue-list
         *ngFor="let name of listName"
+        [id]="name"
         [name]="name"
         [content]="this.labels[name]"
         (drop)="onDrop($event)"

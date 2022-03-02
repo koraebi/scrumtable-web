@@ -12,6 +12,10 @@ import interact from 'interactjs';
   selector: '[appDroppable]',
 })
 export class DroppableDirective implements OnInit {
+
+  @Input()
+  id :any;
+
   @Input()
   options: any;
 
@@ -23,7 +27,7 @@ export class DroppableDirective implements OnInit {
   ngOnInit(): void {
     interact(this.elementRef.nativeElement)
       .dropzone(Object.assign({}, this.options || {}))
-      .on('dropactivate', (event) => event.target.classList.add('can-drop'))
+      .on('dropactive', (event) => event.target.classList.add('can-drop'))
       .on('dragenter', (event) => {
         const draggableElement = event.relatedTarget;
         const dropzoneElement = event.target;
@@ -39,7 +43,12 @@ export class DroppableDirective implements OnInit {
         const model = (window as any).dragData;
 
         if (typeof model === 'object') {
-          this.dropping.emit(model);
+          let res={
+            from:model.from,
+            to:this.id,
+            issue:model.issue
+          }
+          this.dropping.emit(res);
         }
         event.target.classList.add('caught-it');
 

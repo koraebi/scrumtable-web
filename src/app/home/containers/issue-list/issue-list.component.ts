@@ -11,13 +11,15 @@ import { IContent } from '../../model/label.model';
 export class IssueListComponent implements OnInit {
   @Input()
   name: string = '';
-  p: number = 1;
+
+  @Input()
+  id: string='';
 
   @Input()
   content?: IContent;
 
   @Output()
-  drop = new EventEmitter<{ from: string; to: string; index: number }>();
+  drop = new EventEmitter<{ from: string; to: string; issue: Issue }>();
 
   @Output()
   issueSelected = new EventEmitter<Issue>();
@@ -26,11 +28,11 @@ export class IssueListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onDrop(event: CdkDragDrop<Issue[]>) {
+  onDrop(event:any) {
     this.drop.emit({
-      from: event.previousContainer.id,
-      to: event.container.id,
-      index: event.previousIndex,
+      from: event.from,
+      to: event.to,
+      issue: event.issue,
     });
   }
 }

@@ -1,8 +1,9 @@
 <div
   *ngIf="issue"
-  class="card border-success mb-3 detail_container"
-  cdkDrag
-  (cdkDragStarted)="selected.emit(issue)"
+  class="issue card border-success mb-3 detail_container"
+  [from]="from"
+  [model]="getIssue()"
+  (dragStarted)="selected.emit(issue)"
   style="width:20rem; height:19rem;"
   appDraggable>
   <div

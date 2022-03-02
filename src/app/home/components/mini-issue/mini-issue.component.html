@@ -2,20 +2,24 @@
   *ngIf="issue"
   class="issue"
   [style.border-color]="color"
+  [from]="from"
+  [model]="getIssue()"
   cdkDrag
   (cdkDragStarted)="selected.emit(issue)"
   appDraggable
+  [ngbPopover]="popContent"
+  [popoverTitle]="popTitle"
+  triggers="touchstart:touchend"
 >
-  <div class="card"    [style.border-color]="color" *cdkDragPreview style="width: 25%; height: 25%">
-    <div class="card-body">
-      <strong class="issue_container">
-        <h4>
-          <b [style.color]="color" >Issue #{{ issue.number }} :</b>
-        </h4>
-        <p>{{ issue.name }}</p>
-      </strong>
-    </div>
-  </div>
+  <ng-template #popContent
+    ><b [style.color]="color">{{ issue.name }}</b></ng-template
+  >
+  <ng-template #popTitle
+    ><b
+      >Issue : <b>#{{ issue.number }}</b></b
+    ></ng-template
+  >
+
   <div class="number_container">
     <span [style.color]="color"
       ><b>#{{ issue.number }}</b></span

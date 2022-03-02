@@ -13,6 +13,10 @@ export class MiniIssueComponent implements OnInit {
   @Input()
   color?: string;
 
+  @Input()
+  from?: string;
+
+
   @Output()
   selected = new EventEmitter<Issue>();
   constructor() { }
@@ -25,6 +29,14 @@ export class MiniIssueComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+  }
+
+  getIssue(){
+    return {
+      from :this.from,
+      issue :this.issue
+    }
   }
 
 }

@@ -10,6 +10,9 @@ export class DetailsIssueComponent implements OnInit {
   @Input()
   issue?: Issue;
 
+  @Input()
+  from?: string;
+
   @Output()
   selected = new EventEmitter<Issue>();
   constructor() {}
@@ -19,5 +22,12 @@ export class DetailsIssueComponent implements OnInit {
     else return false;
   }
 
+  getIssue(){
+    return{
+      from :this.from,
+      issue:this.issue
+    }
+  }
   ngOnInit(): void {}
+
 }

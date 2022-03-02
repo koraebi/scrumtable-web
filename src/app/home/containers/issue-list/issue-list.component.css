@@ -5,7 +5,6 @@
     flex-direction: row;
     background: white;
     border-radius: 4px;
-    overflow-x: scroll;
     height:8vh;
 }
 .list::-webkit-scrollbar{
@@ -35,9 +34,6 @@
   z-index: 97;
 }
 
-.p-2 name-div {
-  overflow-x: auto;
-}
 
 .vertical {
   border-left: 5px solid black;
