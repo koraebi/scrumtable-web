@@ -9,7 +9,7 @@
 
 
 .global_container {
-
+  overflow:hidden;
 }
 
 .moscow_container {
