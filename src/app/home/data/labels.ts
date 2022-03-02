@@ -1,7 +1,7 @@
 import { ILabel } from '../model/label.model';
 
 export const globalLabels: ILabel = {
-  Available: {
+  Todo: {
     color: '#616A6B',
     issues: [],
   },
@@ -24,7 +24,7 @@ export const globalLabels: ILabel = {
 };
 
 export const labelsPartA: ILabel = {
-  Available: {
+  Todo: {
     color: '#616A6B',
     issues: [],
   },
@@ -47,7 +47,7 @@ export const labelsPartA: ILabel = {
 };
 
 export const labelsPartB: ILabel = {
-  Available: {
+  Todo: {
     color: '#616A6B',
     issues: [],
   },

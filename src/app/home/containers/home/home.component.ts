@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
 
     this.moscowDataFacade
       .getAvailableIssues$()
-      .subscribe((issues) => (this.labels['Available'].issues = issues));
+      .subscribe((issues) => (this.labels['Todo'].issues = issues));
     this.moscowDataFacade
       .getMustIssues$()
       .subscribe((issues) => (this.labels['Must'].issues = issues));
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
 
     this.moscowDataFacade
       .getAvailableIssuesPartA$()
-      .subscribe((issues) => (this.partALabels['Available'].issues = issues));
+      .subscribe((issues) => (this.partALabels['Todo'].issues = issues));
     this.moscowDataFacade
       .getMustIssuesPartA$()
       .subscribe((issues) => (this.partALabels['Must'].issues = issues));
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
 
     this.moscowDataFacade
       .getAvailableIssuesPartB$()
-      .subscribe((issues) => (this.partBLabels['Available'].issues = issues));
+      .subscribe((issues) => (this.partBLabels['Todo'].issues = issues));
     this.moscowDataFacade
       .getMustIssuesPartB$()
       .subscribe((issues) => (this.partBLabels['Must'].issues = issues));
@@ -210,7 +210,7 @@ export class HomeComponent implements OnInit {
 
       this.isEditing = true;
 
-      if (event.to === 'Available') this.homeFacade.setMoscowLabel(event.issue, Moscow.TODO);
+      if (event.to === 'Todo') this.homeFacade.setMoscowLabel(event.issue, Moscow.TODO);
       else this.homeFacade.setMoscowLabel(event.issue, event.to as Moscow);
   }
 
@@ -238,7 +238,7 @@ export class HomeComponent implements OnInit {
         if (from === 'Details') this.homeFacade.closeIssueDetails(event.issue);
 
         this.isEditing = true;
-        if (to === 'Available') this.homeFacade.setMoscowLabel(event.issue, Moscow.TODO);
+        if (to === 'Todo') this.homeFacade.setMoscowLabel(event.issue, Moscow.TODO);
         else this.homeFacade.setMoscowLabel(event.issue, event.to as Moscow);
       }
 
