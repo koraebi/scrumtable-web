@@ -11,6 +11,10 @@
   touch-action: none;
   user-select: none;
   transform: translate(0px, 0px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 b {
@@ -18,15 +22,18 @@ b {
 }
 
 .number_container {
-  margin-top: 10px;
   display: inline-block;
   margin-left: 5px;
+  vertical-align: middle;
+  margin-top: 7px;
+  text-align: center;
 }
 
 .img_container {
-  margin-top: 10px;
   display: inline-block;
   margin-left: 5px;
+  display: flex;
+  vertical-align: middle;
 }
 
 .issue:active {
