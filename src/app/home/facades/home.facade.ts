@@ -38,39 +38,14 @@ export class HomeFacade {
     this.socketService.sendMessage('unselectIssue', JSON.stringify(issue));
   }
 
-  addMoscowLabel(issue: Issue, moscow: Moscow): void {
-    // add the new moscow label
+  setMoscowLabel(issue: Issue, moscow: Moscow): void {
+    // set the new moscow label
     issue.moscow = moscow;
     this.homeState.updateIssue(issue);
     this.issuesAPI.addLabelToIssue(issue, moscow).subscribe(
       // then update state
       (resultIssue) => {}
     );
-  }
-
-  removeMoscowLabel(issue: Issue): void {
-    console.log('OOOOOOOHHH')
-    // remove the current moscow label
-    this.issuesAPI.removeLabelToIssue(issue, issue.moscow as Moscow).subscribe(
-      // then update state
-      (resultIssue) => {}
-    );
-    issue.moscow = undefined;
-    this.homeState.updateIssue(issue);
-  }
-
-  changeMoscowLabel(issue: Issue, moscow: Moscow): void {
-    this.issuesAPI
-      .removeLabelToIssue(issue, issue.moscow as Moscow)
-      .subscribe((resultIssue) =>
-        this.issuesAPI
-          .addLabelToIssue(resultIssue, moscow)
-          .subscribe((finalIssue) => {
-            this.socketService.sendMessage('updateTabletIssues', '');
-          })
-      );
-    issue.moscow = moscow;
-    this.homeState.updateIssue(issue);
   }
 
   isReversed$(): Observable<boolean> {

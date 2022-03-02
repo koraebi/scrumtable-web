@@ -22,10 +22,8 @@ export class SocketService {
 
   private _parseAction(message: any) {
     let action = {
-      label: message.action,
       issue_number: message.issue.number,
-      user: message.sender.login,
-      new_label: message.label.name
+      new_label: message.label
     };
     return action;
   }
@@ -33,8 +31,6 @@ export class SocketService {
   public getMessage = () => {
     if (this.socket) {
       this.socket.on('updateIssue', (message) => {
-        //window.location.reload();
-        //alert('update');
         this.actionEmited$.next(this._parseAction(message));
         console.log(message);
       });

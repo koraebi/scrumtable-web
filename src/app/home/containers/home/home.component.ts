@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   actualLabel: number | undefined;
   message: any = '';
 
+  isEditing = false;
   reversed = false;
   splited = false;
 
@@ -139,26 +140,15 @@ export class HomeComponent implements OnInit {
   }
 
   processAction(action: any) {
-    let message = ''
-    if(action.label === 'labeled'){
-      message = action.user + 'a évalué l\'issue # ' + action.issue_number + ' à ' + action.new_label;
-      if(!this._issueAlreadyPresent(action.issue_number, action.new_label)){
-        this.homeFacade.updateIssue(action.issue_number);
-        this.openSnackBar(message)
-      }
+    if (this.isEditing) {
+      this.isEditing = false;
+      return;
     }
-    else if(action.label === 'unlabeled') {
-      if(action.new_label === 'Available'){
-        message = action.user + 'a délabélisé l\'issue #' + action.issue_number;
-        if(!this._issueAlreadyPresent(action.issue_number, 'Available')) {
-          this.homeFacade.updateIssue(action.issue_number);
-          this.openSnackBar(message)
-        }
-      }
-    }
-    else if(action.label === 'opened') {
-      message = action.user + 'a crée l\'issue #' + action.issue_number;
-      this.moscowDataFacade.loadIssues();
+
+    let message = 'Le Label \"' + action.new_label + "\" a été attribué à l'issue #" + action.issue_number;
+
+    if (!this._issueAlreadyPresent(action.issue_number, action.new_label)) {
+      this.homeFacade.updateIssue(action.issue_number);
       this.openSnackBar(message)
     }
   }
@@ -213,13 +203,15 @@ export class HomeComponent implements OnInit {
 
   onDrop(event: { from: string; to: string; issue: Issue }): void {
       this.homeFacade.sendMessage('unlockTabletIssue', event.issue.number.toString());
-      if (event.from === event.to) return;
-      if (event.from === 'Details') this.homeFacade.closeIssueDetails(event.issue);
-      if (event.from === 'Available')
-        this.homeFacade.addMoscowLabel(event.issue, event.to as Moscow);
-      else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(event.issue);
-      else this.homeFacade.changeMoscowLabel(event.issue, event.to as Moscow);
 
+      if (event.from === event.to) return;
+
+      if (event.from === 'Details') this.homeFacade.closeIssueDetails(event.issue);
+
+      this.isEditing = true;
+
+      if (event.to === 'Available') this.homeFacade.setMoscowLabel(event.issue, Moscow.TODO);
+      else this.homeFacade.setMoscowLabel(event.issue, event.to as Moscow);
   }
 
   onDropSplited(event: { from: string; to: string; issue: Issue }) {
@@ -244,10 +236,10 @@ export class HomeComponent implements OnInit {
 
       if (from != to) {
         if (from === 'Details') this.homeFacade.closeIssueDetails(event.issue);
-        else if (from === 'Available')
-          this.homeFacade.addMoscowLabel(event.issue, to as Moscow);
-        else if (to === 'Available') this.homeFacade.removeMoscowLabel(event.issue);
-        else this.homeFacade.changeMoscowLabel(event.issue, to as Moscow);
+
+        this.isEditing = true;
+        if (to === 'Available') this.homeFacade.setMoscowLabel(event.issue, Moscow.TODO);
+        else this.homeFacade.setMoscowLabel(event.issue, event.to as Moscow);
       }
 
       this.homeFacade.updateSplitPart(event.issue, splitTo);

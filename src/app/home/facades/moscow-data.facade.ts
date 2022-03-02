@@ -24,7 +24,7 @@ export class MoscowDataFacade {
       .getIssues$()
       .pipe(
         map((issues) =>
-          issues.filter((issue) => issue.moscow === undefined && !issue.details)
+          issues.filter((issue) => issue.moscow === Moscow.TODO && !issue.details)
         )
       );
   }
