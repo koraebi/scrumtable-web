@@ -69,8 +69,10 @@ export class HomeFacade {
     this.homeState.updateIssue(issue);
   }
 
-  updateIssue(number: number) {
-    this.homeState.updateIssue(this.homeState.getIssue(number));
+  updateIssue(number: number, newLabel: String) {
+    let issue = this.homeState.getIssue(number);
+    issue.moscow = newLabel as Moscow;
+    this.homeState.updateIssue(issue);
   }
 
   openIssueDetailsSplited(issue: Issue, splitPart: 'A' | 'B'): void {

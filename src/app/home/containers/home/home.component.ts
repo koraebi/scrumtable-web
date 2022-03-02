@@ -147,10 +147,8 @@ export class HomeComponent implements OnInit {
 
     let message = 'Le Label \"' + action.new_label + "\" a été attribué à l'issue #" + action.issue_number;
 
-    if (!this._issueAlreadyPresent(action.issue_number, action.new_label)) {
-      this.homeFacade.updateIssue(action.issue_number);
-      this.openSnackBar(message)
-    }
+    this.homeFacade.updateIssue(action.issue_number, action.new_label);
+    this.openSnackBar(message)
   }
   openSnackBar(m: string) {
     this._snackBar.open(m, 'OK', {
@@ -239,7 +237,7 @@ export class HomeComponent implements OnInit {
 
         this.isEditing = true;
         if (to === 'Todo') this.homeFacade.setMoscowLabel(event.issue, Moscow.TODO);
-        else this.homeFacade.setMoscowLabel(event.issue, event.to as Moscow);
+        else this.homeFacade.setMoscowLabel(event.issue, to as Moscow);
       }
 
       this.homeFacade.updateSplitPart(event.issue, splitTo);
