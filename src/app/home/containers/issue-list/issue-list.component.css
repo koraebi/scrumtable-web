@@ -1,11 +1,15 @@
 .list {
-    width: 100%;
     max-width: 100%;
     display: flex;
     background: white;
     border-radius: 4px;
     overflow-x: auto;
     white-space: nowrap;
+}
+
+.name-div {
+    color: aquamarine;
+    display: flex;
 }
 
 .list::-webkit-scrollbar {
@@ -29,11 +33,7 @@
   float: none;
 }
 
-.name-div {
-    color: aquamarine;
-    width: 10%;
-    display: flex;
-}
+
 
 .name-span {
     margin-left: 10px;
