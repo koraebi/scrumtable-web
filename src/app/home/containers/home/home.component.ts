@@ -106,7 +106,9 @@ export class HomeComponent implements OnInit {
 
     this.moscowDataFacade
       .getAvailableIssuesPartB$()
-      .subscribe((issues) => (this.partBLabels['Available'].issues = issues));
+      .subscribe((issues) => {
+          this.partBLabels['Available'].issues = issues;
+      });
     this.moscowDataFacade
       .getMustIssuesPartB$()
       .subscribe((issues) => (this.partBLabels['Must'].issues = issues));
@@ -123,6 +125,8 @@ export class HomeComponent implements OnInit {
       .getDetailsIssuesPartB$()
       .subscribe((issues) => (this.partBDetailsList = issues));
   }
+
+
 
   private _issueAlreadyPresent(number: number, new_label: string): boolean {
     let v = false;

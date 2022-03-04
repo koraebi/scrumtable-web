@@ -7,6 +7,7 @@ export class HomeState {
   private issues = new BehaviorSubject<Issue[]>([]);
   private splited = new BehaviorSubject<boolean>(false);
   private reversed = new BehaviorSubject<boolean>(false);
+  private alreadySplited = false;
 
   getIssues$(): Observable<Issue[]> {
     return this.issues.asObservable();
@@ -33,6 +34,8 @@ export class HomeState {
     return this.splited.asObservable();
   }
 
+
+
   split(): void {
     this.splited.next(!this.splited.getValue());
     this.issues.next(
@@ -41,6 +44,7 @@ export class HomeState {
         return issue;
       })
     );
+    this.fillAvailablePartB();
   }
 
   isReversed$(): Observable<boolean> {
@@ -49,5 +53,23 @@ export class HomeState {
 
   reverse(): void {
     this.reversed.next(!this.reversed.getValue());
+  }
+
+  fillAvailablePartB() : void{
+    if(this.splited.getValue()){
+      let availableA = this.issues.getValue().filter((issue) => issue.moscow === undefined && !issue.details && issue.splitPart === 'A')
+      const middleIndex = Math.ceil(availableA.length / 2);
+      console.log(middleIndex);
+
+      const secondHalf = availableA.slice().splice(-middleIndex);
+
+      this.issues.next(
+        this.issues.getValue().map((issue) => {
+          if (secondHalf.includes(issue)) issue.splitPart = 'B';
+          return issue;
+        })
+      );
+    }
+
   }
 }
