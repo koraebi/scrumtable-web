@@ -15,9 +15,15 @@ export class HomeState {
     }
 
     updateIssue(issue: Issue): void {
+        console.log(issue);
         const values = this.issues.getValue();
         const index = values.findIndex(value => value.name == issue.name);
         values[index] = issue;
         this.issues.next(values);
+    }
+    getIssue(number: number): Issue {
+      const values = this.issues.getValue();
+      const index = values.findIndex((value) => value.number == number);
+      return values[index]
     }
 }

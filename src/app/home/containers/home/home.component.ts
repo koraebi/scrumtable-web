@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   detailsListLeft: Issue[] = [];
   detailsListRight: Issue[] = [];
   message: string = '';
+  isEditing = false;
 
   get listName(): string[] {
     return Object.keys(this.labels);
@@ -23,9 +24,14 @@ export class HomeComponent implements OnInit {
   constructor(private homeFacade: HomeFacade) {}
 
   ngOnInit() {
+    this.homeFacade.getActionEmited$().subscribe(action => this.processAction(action));
+    var log=this.homeFacade.getActionEmited$().subscribe(action => this.processAction(action));
+    console.log(log);
+    this.homeFacade.loadIssues();
+
     this.homeFacade
       .getAvailableIssues$()
-      .subscribe((issues) => (this.labels['Available'].issues = issues));
+      .subscribe((issues) => (this.labels['Todo'].issues = issues));
     this.homeFacade
       .getMustIssues$()
       .subscribe((issues) => (this.labels['Must'].issues = issues));
@@ -54,24 +60,39 @@ export class HomeComponent implements OnInit {
   onIssueSelected(issue: Issue): void {
     this.homeFacade.sendMessage('lockTabletIssue', issue.number.toString());
   }
+  processAction(action: any) {
+    //console.log(action.issue_number);
+    //console.log(action.new_label);
+    if (this.isEditing) {
+      this.isEditing = false;
+      return;
+    }
+
+    let message = 'Le Label \"' + action.new_label + "\" a été attribué à l'issue #" + action.issue_number;
+
+    this.homeFacade.updateIssue(action.issue_number, action.new_label);
+  }
+
 
   onDrop(event: { from: string; to: string; issue: Issue }): void {
-    console.log(event.to);
+    const from = event.from.split('-')[0];
+    const to = event.to.split('-')[0];
     this.homeFacade.sendMessage('unlockTabletIssue', event.issue.number.toString());
 
-    if (event.from === event.to) return;
+    if (from === to) return;
 
-    if (event.from === 'left_details' || event.from === 'right_details') this.homeFacade.closeIssueDetails(event.issue);
-    if (event.from === 'Available')
-      this.homeFacade.addMoscowLabel(event.issue, event.to as Moscow);
-    else if (event.to === 'Available') this.homeFacade.removeMoscowLabel(event.issue);
-    else this.homeFacade.changeMoscowLabel(event.issue, event.to as Moscow);
+    if (from === 'left_details' || from === 'right_details') this.homeFacade.closeIssueDetails(event.issue);
+
+    this.isEditing = true;
+
+    if ( to === 'Todo')
+      this.homeFacade.addMoscowLabel(event.issue, to as Moscow);
+
+    else this.homeFacade.addMoscowLabel(event.issue,to as Moscow);
   }
 
   onDetailsDrop(event: { from: string; to: string; issue: Issue }) {
-    console.log(event.from);
-    console.log(event.issue);
-    console.log(event.to);
+
 
     this.homeFacade.sendMessage('unlockTabletIssue', event.issue.number.toString());
     if (event.to === "right_details")
@@ -88,6 +109,6 @@ export class HomeComponent implements OnInit {
   }
 
   selectedIssue(event: Issue) {
-    console.log(event);
+    //console.log(event);
   }
 }

@@ -1,7 +1,7 @@
 import {ILabel} from "../model/label.model";
 
 export const labels: ILabel = {
-  "Available": {
+  "Todo": {
     color: "#616A6B",
     issues: []
   },

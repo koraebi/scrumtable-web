@@ -15,7 +15,9 @@ export class HomeFacade {
   ) {}
 
   // Socket
-
+  getActionEmited$(): Observable<any>{
+    return this.socketService.getMessage();
+  }
   sendMessage(event: string, message: string): void {
     this.socketService.sendMessage(event, message);
   }
@@ -33,7 +35,7 @@ export class HomeFacade {
       .getIssues$()
       .pipe(
         map((issues) =>
-          issues.filter((issue) => issue.moscow === undefined && !issue.details)
+          issues.filter((issue) => issue.moscow === Moscow.TODO && !issue.details)
         )
       );
   }
@@ -114,27 +116,19 @@ export class HomeFacade {
     );
   }
 
-  removeMoscowLabel(issue: Issue): void {
-    // remove the current moscow label
-    this.issuesAPI.removeLabelToIssue(issue, issue.moscow as Moscow).subscribe(
+  setMoscowLabel(issue: Issue, moscow: Moscow): void {
+    // set the new moscow label
+    issue.moscow = moscow;
+    this.homeState.updateIssue(issue);
+    this.issuesAPI.addLabelToIssue(issue, moscow).subscribe(
       // then update state
       (resultIssue) => {}
     );
-    issue.moscow = undefined;
-    this.homeState.updateIssue(issue);
   }
 
-  changeMoscowLabel(issue: Issue, moscow: Moscow): void {
-    this.issuesAPI
-      .removeLabelToIssue(issue, issue.moscow as Moscow)
-      .subscribe((resultIssue) =>
-        this.issuesAPI
-          .addLabelToIssue(resultIssue, moscow)
-          .subscribe((finalIssue) => {
-            this.socketService.sendMessage('updateTabletIssues', '');
-          })
-      );
-    issue.moscow = moscow;
+  updateIssue(number: number, newLabel: String) {
+    let issue = this.homeState.getIssue(number);
+    issue.moscow = newLabel as Moscow;
     this.homeState.updateIssue(issue);
   }
 }

@@ -1,10 +1,10 @@
 <div style="height: 19%;" *ngIf="this.content" >
     <!-- this one shows line up the issues that are labelled -->
-  <hr *ngIf="name!=='Available'" class="line">
+  <hr *ngIf="name!=='Todo'" class="line">
     <!-- this one shows line up issues that aren't labelled -->
-  <hr *ngIf="name==='Available'" class="full-line">
+  <hr *ngIf="name==='Todo'" class="full-line">
   <!-- this one shows issues already labelled -->
-  <div *ngIf="name!=='Available'" class="d-flex"  >
+  <div *ngIf="name!=='Todo'" class="d-flex"  >
     <div  class="p-2 name-div" [style.color]="this.content.color">
       <span class="name-span"><h1>{{this.name}}</h1></span></div>
     <div  class="p-2 flex-grow-1 list"  [id]="id" appDroppable [options]="{ accept: '.issue'}"  (dropping)="onDrop($event)">
@@ -14,7 +14,7 @@
     <span class="name-span"><h1>{{this.name}}</h1></span></div>
   </div>
   <!-- this one shows issues non labelled -->
-  <div *ngIf="name==='Available'" class="d-flex" >
+  <div *ngIf="name==='Todo'" class="d-flex" >
     <div  class="p-2 name-div" [style.color]="this.content.color">
       <span class="name-span"><h1>Issues </h1></span></div>
     <div  appDroppable class="p-2 flex-grow-1 list"  [id]="id" appDroppable [options]="{ accept: '.issue'}" (dropping)="onDrop($event)">
