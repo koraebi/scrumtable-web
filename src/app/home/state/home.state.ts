@@ -44,7 +44,6 @@ export class HomeState {
         return issue;
       })
     );
-    this.fillAvailablePartB();
   }
 
   isReversed$(): Observable<boolean> {

@@ -132,6 +132,9 @@ export class MoscowDataFacade {
       map((issues) => issues.filter((issue) => issue.splitPart === 'B'))
     );
   }
+  fillPartB(){
+    this.homeState.fillAvailablePartB();
+  }
 
   getMustIssuesPartB$(): Observable<Issue[]> {
     return this.getMustIssues$().pipe(

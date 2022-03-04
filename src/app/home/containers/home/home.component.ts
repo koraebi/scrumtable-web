@@ -108,6 +108,7 @@ export class HomeComponent implements OnInit {
       .getAvailableIssuesPartB$()
       .subscribe((issues) => {
           this.partBLabels['Available'].issues = issues;
+          if (issues.length === 0 && this.partALabels['Available'].issues.length>1) this.moscowDataFacade.fillPartB();
       });
     this.moscowDataFacade
       .getMustIssuesPartB$()
@@ -125,7 +126,6 @@ export class HomeComponent implements OnInit {
       .getDetailsIssuesPartB$()
       .subscribe((issues) => (this.partBDetailsList = issues));
   }
-
 
 
   private _issueAlreadyPresent(number: number, new_label: string): boolean {
